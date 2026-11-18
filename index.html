@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>我们的小宇宙</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+KuaiLe&family=Patrick+Hand&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{
@@ -252,19 +252,134 @@ nav.pills button{flex:none}
 .compose{display:flex;gap:9px;align-items:flex-end}
 .compose textarea{flex:1;border:2px solid var(--line);border-radius:15px;padding:10px 12px;background:#fff;min-height:52px;resize:vertical;font-size:15px}
 
+
+/* ================= v4 ================= */
+:root{
+  --line:#574438; --honey:#F5A66B; --honey-deep:#E8863B; --pink:#F8D8D8;
+  --yellow:#F8D77A; --mint:#DCEEDC; --lav:#E9E0F3;
+  --shadow:0 3px 0 rgba(87,68,56,.45);
+}
+.logo-en{font-family:"Patrick Hand","Ma Shan Zheng",cursive;font-size:19px;letter-spacing:1px}
+#bootLoad{position:fixed;inset:0;background:var(--paper);z-index:300;display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--ink-soft)}
+
+/* account menu */
+.acct-wrap{position:relative;flex:none}
+#acctBtn{width:39px;height:39px;border-radius:50%;border:2px solid var(--line);background:url("img/pair-front.jpg") center 22%/cover;box-shadow:0 2px 0 rgba(87,68,56,.8);cursor:pointer;padding:0}
+.acct-menu{position:absolute;right:0;top:48px;background:var(--card);border:2px solid var(--line);border-radius:16px;box-shadow:0 6px 18px rgba(87,68,56,.25);padding:7px;min-width:158px;z-index:80}
+.acct-menu button{display:block;width:100%;text-align:left;background:none;border:none;padding:9px 11px;font-size:14.5px;border-radius:10px;color:var(--ink);cursor:pointer}
+.acct-menu button:hover{background:var(--pink-soft)}
+
+/* back bar */
+.backbar{display:flex;align-items:center;gap:12px;margin:2px 0 14px}
+.back-btn{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:7px 16px;font-size:14px;font-weight:700;box-shadow:0 2px 0 rgba(87,68,56,.8);color:var(--ink);min-height:40px}
+.back-btn:active{transform:translateY(2px);box-shadow:none}
+.back-title{font-size:21px}
+
+/* hero v4 */
+.hero4{display:grid;grid-template-columns:1.12fr .88fr;gap:20px;align-items:center}
+@media(max-width:640px){.hero4{grid-template-columns:1fr}}
+.frame{position:relative;background:#fff;border:2px solid var(--line);border-radius:10px;padding:10px 10px 26px;transform:rotate(-2deg);box-shadow:0 6px 16px rgba(87,68,56,.22)}
+.frame img{width:100%;display:block;border-radius:5px}
+.note-tag{position:absolute;left:-8px;top:-14px;background:#FFF3C4;border:1.8px solid var(--line);border-radius:6px;padding:7px 12px;font-size:14.5px;transform:rotate(-4deg);box-shadow:0 3px 0 rgba(87,68,56,.5);z-index:2}
+.note-tag::before{content:"";position:absolute;left:50%;top:-9px;width:52px;height:15px;margin-left:-26px;background:rgba(255,255,255,.65);border:1px solid rgba(87,68,56,.25);transform:rotate(2deg)}
+.hero-r{text-align:center;padding:6px 2px}
+.hero-r .h-lab{font-size:21px;letter-spacing:2px}
+.hero-r .h-num{font-family:"Ma Shan Zheng",cursive;font-size:88px;line-height:1.08;color:var(--honey-deep);text-shadow:3px 3px 0 rgba(245,166,107,.3)}
+.hero-r .h-num small{font-size:32px;color:var(--ink)}
+.hero-r .h-from{color:var(--ink-soft);font-size:14px;margin:7px 0 15px}
+.cloud-wave{display:block;width:100%;height:34px;margin:2px 0 4px}
+
+/* quick v4 */
+.q4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+@media(max-width:640px){.q4{grid-template-columns:repeat(2,1fr)}}
+.qc4{border:2px solid var(--line);border-radius:19px;padding:15px 13px;box-shadow:0 3px 0 rgba(87,68,56,.6);text-align:left;color:var(--ink);font-family:inherit;cursor:pointer;position:relative;width:100%}
+.qc4:active{transform:scale(.97)}
+.qc4 .qi2{font-size:25px}
+.qc4 .qt2{font-weight:700;font-size:16.5px;margin-top:5px}
+.qc4 .qs2{color:var(--ink-soft);font-size:12.5px;margin-top:2px}
+.qc4 .qarrow{position:absolute;right:11px;bottom:11px;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.qc4.y{background:#FFF6D8}.qc4.p{background:#FDECEF}.qc4.m{background:#EAF4EA}.qc4.l{background:#F1EAF9}
+
+/* home previews */
+.home-wish{display:flex;gap:16px;align-items:stretch}
+.home-wish .hw-list{flex:1.15;min-width:0}
+.home-wish .hw-img{flex:1;min-width:0;text-align:center}
+.home-wish .hw-img img{width:100%;border:2px solid var(--line);border-radius:15px;display:block}
+.home-wish .hw-cap{font-size:15.5px;margin-top:8px}
+@media(max-width:640px){.home-wish{flex-direction:column}}
+.hw-row{display:flex;align-items:center;gap:11px;padding:11px 4px;border-bottom:2px dashed rgba(87,68,56,.3);cursor:pointer}
+.hw-row:last-child{border-bottom:none}
+.hw-check{width:27px;height:27px;flex:none;border-radius:50%;border:2.2px solid rgba(87,68,56,.55);background:#fff;color:transparent;font-size:15px;display:flex;align-items:center;justify-content:center;padding:0}
+.hw-row.done .hw-check{background:var(--pink);border-color:var(--line);color:#C2436B}
+.hw-row.done .hw-t{color:var(--ink-soft);text-decoration:line-through}
+.hw-t{font-size:15.5px;flex:1;min-width:0}
+.hw-done{font-size:11.5px;font-weight:700;color:#C2436B;background:#FDECEF;border:1.8px solid var(--line);border-radius:999px;padding:2px 9px;flex:none}
+.photo-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+@media(max-width:640px){.photo-strip{grid-template-columns:repeat(2,1fr)}}
+.photo-strip .ph img{height:128px}
+.view-all{margin-left:auto;font-size:13.5px;color:var(--honey-deep);font-weight:700;background:none;border:none;cursor:pointer}
+
+/* dates page */
+.date-row{display:flex;align-items:center;gap:14px}
+.date-row .dr-r{margin-left:auto;text-align:right;flex:none;width:128px}
+.date-row .dr-n{font-family:"Ma Shan Zheng",cursive;font-size:25px;color:var(--honey-deep)}
+.date-row.past{opacity:.6}
+.kind-chip{font-size:11px;font-weight:700;border:1.6px solid var(--line);border-radius:999px;padding:1px 8px;background:var(--cream);margin-left:7px;vertical-align:2px}
+
+/* timeline heart nodes + collapse */
+.tl .node::before{content:"❤";background:none;border:none;font-size:14px;left:-38px;top:1px;width:auto;height:auto}
+.nn .more{color:var(--honey-deep);font-weight:700;background:none;border:none;cursor:pointer;font-size:13.5px;padding:0 0 0 5px}
+
+/* letters paper */
+.letter-body{background:repeating-linear-gradient(#fff,#fff 30px,#F3E3D3 31px);line-height:31px;padding:8px 16px}
+.lock-badge{width:64px;height:44px;object-fit:cover;border-radius:9px;border:2px solid var(--line);flex:none}
+
+/* board avatars from pair-front */
+.msg .av{background-size:235%;background-repeat:no-repeat;background-color:#FDEBD2}
+.msg .av-bear{background-image:url("img/pair-front.jpg");background-position:27% 30%}
+.msg .av-cat{background-image:url("img/pair-front.jpg");background-position:76% 28%}
+
+/* auth v4 */
+.auth-img{width:158px;height:158px;object-fit:cover;border-radius:50%;border:2.5px solid var(--line);box-shadow:0 3px 0 rgba(87,68,56,.6);margin-bottom:6px}
+.pwd-wrap{position:relative}
+.pwd-wrap input{padding-right:48px}
+.pwd-eye{position:absolute;right:7px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:18px;cursor:pointer;padding:7px;min-width:40px;min-height:40px}
+
+/* photo viewer */
+.viewer-nav{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.viewer-nav .vn-btn{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:7px 18px;font-weight:700;box-shadow:0 2px 0 rgba(87,68,56,.8);color:var(--ink);min-height:42px}
+.viewer-nav .vn-c{color:var(--ink-soft);font-size:13.5px}
+
+/* bottom nav (mobile) */
+#bottomNav{display:none}
+@media(max-width:640px){
+  nav.pills{display:none}
+  #bottomNav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,251,242,.97);border-top:2px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+  #bottomNav button{flex:1;background:none;border:none;font-size:11.5px;color:var(--ink-soft);display:flex;flex-direction:column;align-items:center;gap:1px;padding:5px 0;cursor:pointer;border-radius:12px;min-height:48px;justify-content:center}
+  #bottomNav button span{font-size:20px}
+  #bottomNav button.active{color:var(--honey-deep);font-weight:700;background:#FDEBD2}
+  main{padding-bottom:96px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .modal{max-height:94vh}
+}
+.sleep-banner{border:2px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:18px;background:#fff}
+.sleep-banner img{width:100%;display:block}
+.sleep-banner .sc-cap{text-align:center;padding:11px 10px 13px;font-size:16.5px}
+
 footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 30px}
 </style>
 </head>
 <body>
+<div id="bootLoad">💌 小宇宙加载中…</div>
 
 <!-- ================= AUTH ================= -->
 <div id="authView" class="auth-wrap hidden">
   <div class="card auth-card">
-    <div style="font-size:40px">💌</div>
+    <img class="auth-img" src="img/pair-front.jpg" alt="小棕熊和小白猫">
     <h1 class="hand">我们的小宇宙</h1>
     <div class="sub">这里只住着两个人 · 请先登录</div>
     <div class="f-row"><label>邮箱</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com"></div>
-    <div class="f-row"><label>密码</label><input id="authPass" type="password" autocomplete="current-password" placeholder="至少 6 位"></div>
+    <div class="f-row"><label>密码</label><div class="pwd-wrap"><input id="authPass" type="password" autocomplete="current-password" placeholder="至少 6 位"><button class="pwd-eye" id="pwdToggle" type="button" title="显示/隐藏密码">👁</button></div></div>
     <button class="btn" id="btnLogin" style="width:100%">登 录</button>
     <div style="margin-top:12px;font-size:13.5px;color:var(--ink-soft)">第一次来？<button class="linkish" id="btnGoRegister">用邮箱注册</button></div>
     <div class="auth-msg" id="authMsg"></div>
@@ -273,40 +388,46 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
 
 <!-- ================= APP ================= -->
 <div id="appView" class="hidden">
-  <div class="topbar"><div class="topbar-in">
-    <div class="logo hand"><span class="heart">❤</span><span id="siteTitle">我们的小宇宙</span></div>
+    <div class="topbar"><div class="topbar-in">
+    <div class="logo"><span style="display:inline-flex;width:34px;height:34px;border-radius:50%;background:var(--pink);border:2px solid var(--line);align-items:center;justify-content:center;font-size:16px;color:#C2436B">❤</span><span class="logo-en">OUR LITTLE UNIVERSE</span></div>
     <nav class="pills">
       <button data-tab="home" class="active">首页</button>
-      <button data-tab="album">相册</button>
-      <button data-tab="timeline">回忆</button>
+      <button data-tab="album">日常记录</button>
+      <button data-tab="dates">纪念日</button>
+      <button data-tab="wishes">心愿清单</button>
+      <button data-tab="timeline">回忆库</button>
       <button data-tab="letters">时光信</button>
-      <button data-tab="wishes">心愿</button>
       <button data-tab="board">留言</button>
     </nav>
-    <button class="icon-btn" id="btnSettings" title="设置">⚙️</button>
-    <button class="icon-btn" id="btnLogout" title="退出登录">🚪</button>
+    <div class="acct-wrap">
+      <button id="acctBtn" title="账户菜单"></button>
+      <div id="acctMenu" class="acct-menu hidden">
+        <button id="menuSettings">⚙️ 个人设置</button>
+        <button id="menuAccount">👤 账号信息</button>
+        <button id="menuLogout">🚪 退出登录</button>
+      </div>
+    </div>
+    <span id="btnSettings" class="hidden"></span><span id="btnLogout" class="hidden"></span><span id="quickSettings" class="hidden"></span>
   </div></div>
 
   <main>
     <!-- HOME -->
     <!-- HOME -->
+    <!-- HOME -->
     <section id="tab-home">
-      <div class="card">
-        <div class="hero2">
-          <div class="avatar-badge">
-            <div class="circ"><svg width="74" height="66" viewBox="0 0 96 86"><ellipse cx="22" cy="26" rx="11" ry="17" fill="#B97F45" stroke="#6B4A2F" stroke-width="2.5" transform="rotate(-18 22 26)"/><ellipse cx="74" cy="26" rx="11" ry="17" fill="#B97F45" stroke="#6B4A2F" stroke-width="2.5" transform="rotate(18 74 26)"/><circle cx="48" cy="46" r="31" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><rect x="24" y="34" width="20" height="12" rx="6" fill="#333"/><rect x="52" y="34" width="20" height="12" rx="6" fill="#333"/><rect x="43" y="38" width="10" height="4" fill="#333"/><ellipse cx="48" cy="56" rx="6" ry="4.5" fill="#8A5A33"/><path d="M42 63 Q48 68 54 63" stroke="#6B4A2F" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="29" cy="55" r="5" fill="#F6A8B8" opacity=".65"/><circle cx="67" cy="55" r="5" fill="#F6A8B8" opacity=".65"/></svg></div>
-            <div class="who hand" id="nameA1">他</div>
+      <div class="card" style="padding:24px 20px">
+        <div class="hero4">
+          <div class="frame">
+            <div class="note-tag hand">和你在一起，都是最好的时光 ♡</div>
+            <img src="img/hero-sunset.jpg" alt="小棕熊和小白猫看夕阳">
           </div>
-          <div class="hero-mid">
-            <div class="lab hand">我们已相爱</div>
-            <div class="bignum"><span id="daysNum">–</span><small> 天</small></div>
-            <svg width="170" height="22" viewBox="0 0 300 26" preserveAspectRatio="none" style="max-width:80%"><polyline points="0,13 96,13 106,4 116,22 124,13 300,13" fill="none" stroke="#F2A0B5" stroke-width="2.5" stroke-linecap="round"/></svg>
-            <div style="color:#E4572E;font-size:16px;line-height:1">❤</div>
-            <div class="from" id="daysFrom">从设置里填上在一起的那一天开始</div>
-          </div>
-          <div class="avatar-badge">
-            <div class="circ"><svg width="74" height="66" viewBox="0 0 96 86"><ellipse cx="22" cy="26" rx="11" ry="17" fill="#EDE4D3" stroke="#6B4A2F" stroke-width="2.5" transform="rotate(-18 22 26)"/><ellipse cx="74" cy="26" rx="11" ry="17" fill="#EDE4D3" stroke="#6B4A2F" stroke-width="2.5" transform="rotate(18 74 26)"/><circle cx="48" cy="44" r="31" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="38" cy="42" r="3.2" fill="#5B4636"/><circle cx="58" cy="42" r="3.2" fill="#5B4636"/><ellipse cx="48" cy="52" rx="5" ry="4" fill="#C98A5A"/><path d="M43 59 Q48 63 53 59" stroke="#6B4A2F" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="29" cy="52" r="5" fill="#F6A8B8" opacity=".8"/><circle cx="67" cy="52" r="5" fill="#F6A8B8" opacity=".8"/><g><rect x="60" y="58" width="17" height="21" rx="3" fill="#F6C177" stroke="#6B4A2F" stroke-width="2"/><rect x="60" y="64" width="17" height="15" rx="3" fill="#B08968"/><circle cx="65" cy="74" r="1.8" fill="#333"/><circle cx="71" cy="71" r="1.8" fill="#333"/><circle cx="68" cy="77" r="1.8" fill="#333"/><rect x="67" y="50" width="3.5" height="10" rx="1.5" fill="#E4572E" transform="rotate(12 68 55)"/></g></svg></div>
-            <div class="who hand" id="nameB1">她</div>
+          <div class="hero-r">
+            <div class="h-lab hand">我们已经在一起了</div>
+            <div class="h-num"><span id="daysNum">–</span><small> 天</small></div>
+            <svg width="180" height="20" viewBox="0 0 300 22" style="max-width:82%"><path d="M4 12 Q 40 4, 75 12 T 150 12" fill="none" stroke="#F2A0B5" stroke-width="2.5" stroke-linecap="round"/><text x="152" y="17" font-size="15" fill="#E4572E">❤</text><path d="M172 12 Q 205 4, 240 12 T 296 12" fill="none" stroke="#F2A0B5" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <div class="h-from" id="daysFrom">从设置里填上在一起的那一天开始</div>
+            <button class="btn" data-go="timeline">一起走过更多的日子 ➜</button>
+            <div class="hidden"><span id="nameA1"></span><span id="nameB1"></span></div>
           </div>
         </div>
       </div>
@@ -324,32 +445,43 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
             <div class="progress" style="margin-top:0"><i id="nextBar" style="width:0%"></i></div>
           </div>
         </div>
+        <div style="text-align:right;margin-top:10px"><button class="view-all" data-go="dates">查看全部 &gt;</button></div>
       </div>
 
-      <div class="card story-card">
-        <div class="st-img"><svg viewBox="0 0 520 300"><rect width="520" height="300" fill="#CDEBC0"/><rect y="205" width="520" height="95" fill="#A8D89A"/><ellipse cx="415" cy="90" rx="105" ry="52" fill="#8ED0E8"/><ellipse cx="415" cy="90" rx="105" ry="52" fill="none" stroke="#6B4A2F" stroke-width="2.5"/><path d="M330 78 Q415 60 500 78" stroke="#fff" stroke-width="4" fill="none" opacity=".7"/><rect x="52" y="105" width="15" height="80" fill="#8A5A33"/><circle cx="60" cy="82" r="44" fill="#6FBF73" stroke="#6B4A2F" stroke-width="2.5"/><rect x="128" y="125" width="12" height="60" fill="#8A5A33"/><circle cx="134" cy="105" r="32" fill="#8FD694" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="452" cy="34" r="19" fill="#FFD93D" stroke="#6B4A2F" stroke-width="2.5"/><g transform="rotate(-4 260 225)"><rect x="165" y="188" width="190" height="78" rx="8" fill="#F6A8B8" stroke="#6B4A2F" stroke-width="2.5"/><rect x="178" y="200" width="164" height="54" rx="6" fill="#FFF6EC"/></g><ellipse cx="228" cy="222" rx="33" ry="15" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="258" cy="212" r="14" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><ellipse cx="252" cy="200" rx="5" ry="9" fill="#B97F45" stroke="#6B4A2F" stroke-width="2"/><ellipse cx="305" cy="224" rx="33" ry="15" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="278" cy="214" r="14" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><ellipse cx="270" cy="203" rx="5" ry="9" fill="#EDE4D3" stroke="#6B4A2F" stroke-width="2"/><rect x="330" y="196" width="24" height="19" rx="3" fill="#F6C177" stroke="#6B4A2F" stroke-width="2"/><path d="M336 196 L342 184 L348 196" stroke="#6B4A2F" stroke-width="2" fill="none"/><circle cx="196" cy="238" r="5" fill="#E4572E"/><circle cx="318" cy="242" r="5" fill="#F5C542"/></svg></div>
-        <div class="st-tx">
-          <div class="st-t hand">继续创造<br>属于我们的故事</div>
-          <div class="st-s">每一天都是新的开始<br>每一刻都值得被记录</div>
-          <button class="btn" data-go="timeline">🕐 去记录</button>
+      <div class="sec-title hand">⭐ 快速入口 <span style="margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-family:inherit">把生活的每一刻，都变成回忆 ♡</span></div>
+      <div class="q4" style="margin-bottom:6px">
+        <button class="qc4 y" data-go="dates"><div class="qi2">🗓️</div><div class="qt2 hand">纪念日</div><div class="qs2">重要的日子不再错过</div><span class="qarrow">➜</span></button>
+        <button class="qc4 p" data-go="wishes"><div class="qi2">📋</div><div class="qt2 hand">心愿清单</div><div class="qs2">一起完成更多愿望</div><span class="qarrow">➜</span></button>
+        <button class="qc4 m" data-go="timeline"><div class="qi2">📷</div><div class="qt2 hand">回忆库</div><div class="qs2">收藏我们的故事</div><span class="qarrow">➜</span></button>
+        <button class="qc4 l" data-go="album"><div class="qi2">📖</div><div class="qt2 hand">日常记录</div><div class="qs2">记录每一天的甜蜜</div><span class="qarrow">➜</span></button>
+      </div>
+
+      <svg class="cloud-wave" viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,34 C240,62 480,6 720,34 C960,62 1200,6 1440,34 L1440,60 L0,60 Z" fill="#F8D8D8" opacity=".55"/></svg>
+
+      <div class="sec-title hand">⭐ 心愿清单 <span style="font-size:12.5px;background:#FDECEF;border:1.8px solid var(--line);border-radius:999px;padding:2px 11px;margin-left:8px;font-family:inherit">和你一起实现的小愿望 ♡</span><button class="view-all" data-go="wishes">查看全部 &gt;</button></div>
+      <div class="card">
+        <div class="home-wish">
+          <div class="hw-list">
+            <div id="homeWishList"></div>
+            <div class="empty hidden" id="homeWishEmpty" style="padding:16px 6px">还没有心愿<br><button class="linkish" data-go="wishes">去写下第一个心愿 🌠</button></div>
+          </div>
+          <div class="hw-img">
+            <img src="img/hill-back.jpg" alt="小棕熊和小白猫在山坡上">
+            <div class="hw-cap hand">未来的日子，也要一起呀 ♡</div>
+          </div>
         </div>
       </div>
 
-      <div class="sec-title hand">⭐ 快速入口</div>
-      <div class="quick2" style="margin-bottom:18px">
-        <button class="q2" data-go="album"><span class="qc" style="background:#FDEBD2">📷</span><div class="qt hand">日常记录</div><div class="qs">记录美好瞬间</div></button>
-        <button class="q2" id="quickSettings"><span class="qc" style="background:#FDE7F0">🎂</span><div class="qt hand">纪念日</div><div class="qs">重要的日子</div></button>
-        <button class="q2" data-go="wishes"><span class="qc" style="background:#E9F5EC">🌠</span><div class="qt hand">心愿清单</div><div class="qs">未来的计划</div></button>
-        <button class="q2" data-go="timeline"><span class="qc" style="background:#E7EEF9">🌙</span><div class="qt hand">回忆库</div><div class="qs">珍藏的时光</div></button>
-      </div>
+      <div class="sec-title hand">📷 我们的相册 <span style="font-size:12.5px;color:var(--ink-soft);margin-left:8px;font-family:inherit">记录下每一个心动的瞬间 ♡</span><button class="view-all" data-go="album">查看全部 &gt;</button></div>
+      <div class="photo-strip" id="homePhotos"></div>
+      <div class="empty hidden" id="homePhotoEmpty">相册还空着<br><button class="linkish" data-go="album">去放第一张照片 📷</button></div>
 
-      <div class="scene"><svg viewBox="0 0 640 300"><rect width="640" height="300" fill="#AEE2F5"/><circle cx="556" cy="46" r="24" fill="#FFD93D" stroke="#6B4A2F" stroke-width="2.5"/><g fill="#fff" stroke="#6B4A2F" stroke-width="2"><ellipse cx="110" cy="52" rx="42" ry="17"/><ellipse cx="142" cy="44" rx="30" ry="14"/><ellipse cx="430" cy="36" rx="34" ry="13"/></g><path d="M0 128 Q160 84 330 118 T640 104 V300 H0 Z" fill="#8FCB9B"/><path d="M0 168 Q200 132 420 158 T640 148 V300 H0 Z" fill="#F2D38A"/><g stroke="#D9A441" stroke-width="3" stroke-linecap="round"><path d="M40 210 v34 M86 224 v34 M560 206 v34 M606 218 v34 M150 200 v30 M500 232 v30"/></g><path d="M268 300 L306 176 L336 176 L392 300 Z" fill="#EBD9AE" stroke="#C9AE72" stroke-width="2"/><path d="M0 272 H640 V300 H0 Z" fill="#7FC8E8"/><path d="M30 284 h44 M180 291 h52 M470 285 h58" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/><ellipse cx="298" cy="238" rx="27" ry="14" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="322" cy="228" r="13" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><ellipse cx="317" cy="216" rx="5" ry="9" fill="#B97F45" stroke="#6B4A2F" stroke-width="2"/><path d="M274 232 Q262 224 266 214" stroke="#6B4A2F" stroke-width="2.5" fill="none"/><ellipse cx="352" cy="252" rx="24" ry="12" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="332" cy="243" r="12" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><ellipse cx="326" cy="232" rx="4.5" ry="8" fill="#EDE4D3" stroke="#6B4A2F" stroke-width="2"/></svg><div class="sc-cap hand">“和你一起看过的风景，都是最美的画面”</div></div>
-
-      <div class="scene"><svg viewBox="0 0 640 300"><rect width="640" height="300" fill="#FDEFF3"/><g fill="#fff" stroke="#6B4A2F" stroke-width="2"><ellipse cx="120" cy="44" rx="40" ry="15"/><ellipse cx="480" cy="30" rx="32" ry="12"/></g><path d="M0 196 L640 156 V300 H0 Z" fill="#9AA3AD"/><path d="M0 236 L640 198" stroke="#fff" stroke-width="5" stroke-dasharray="34 26"/><rect x="52" y="86" width="13" height="86" fill="#8A5A33"/><g fill="#F6A8B8" stroke="#6B4A2F" stroke-width="2"><circle cx="58" cy="66" r="27"/><circle cx="36" cy="82" r="19"/><circle cx="82" cy="84" r="20"/></g><rect x="548" y="70" width="13" height="86" fill="#8A5A33"/><g fill="#F6A8B8" stroke="#6B4A2F" stroke-width="2"><circle cx="554" cy="50" r="27"/><circle cx="532" cy="66" r="19"/><circle cx="578" cy="68" r="20"/></g><g fill="#F8C3D0"><ellipse cx="150" cy="120" rx="8" ry="5" transform="rotate(-24 150 120)"/><ellipse cx="262" cy="88" rx="8" ry="5" transform="rotate(18 262 88)"/><ellipse cx="420" cy="128" rx="8" ry="5" transform="rotate(-14 420 128)"/><ellipse cx="520" cy="104" rx="8" ry="5" transform="rotate(26 520 104)"/></g><circle cx="252" cy="238" r="21" fill="#444" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="252" cy="238" r="8" fill="#D9D9D9"/><circle cx="398" cy="230" r="21" fill="#444" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="398" cy="230" r="8" fill="#D9D9D9"/><path d="M252 238 L292 178 Q300 162 322 164 L352 166 Q378 168 384 190 L398 230" fill="#57B8B2" stroke="#6B4A2F" stroke-width="2.5"/><path d="M292 178 L336 176 L330 196 L286 196 Z" fill="#3E8E89" stroke="#6B4A2F" stroke-width="2.5"/><path d="M322 164 L312 138 M312 138 L336 134" stroke="#6B4A2F" stroke-width="5" fill="none" stroke-linecap="round"/><ellipse cx="330" cy="140" rx="24" ry="16" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="352" cy="128" r="14" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><ellipse cx="346" cy="116" rx="5" ry="9" fill="#B97F45" stroke="#6B4A2F" stroke-width="2"/><rect x="334" y="120" width="15" height="8" rx="4" fill="#333"/><ellipse cx="392" cy="152" rx="23" ry="15" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="372" cy="140" r="13" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><ellipse cx="365" cy="129" rx="4.5" ry="8" fill="#EDE4D3" stroke="#6B4A2F" stroke-width="2"/><path d="M404 146 Q428 118 424 92" stroke="#6B4A2F" stroke-width="2" fill="none"/><circle cx="424" cy="82" r="13" fill="#F5C542" stroke="#6B4A2F" stroke-width="2.5"/><path d="M415 76 a13 13 0 0 1 18 0" stroke="#E4572E" stroke-width="3" fill="none"/></svg><div class="sc-cap hand">“只要有你在身边，每一天都是好天气”</div></div>
+      <div class="sleep-banner" style="margin-top:20px"><img src="img/sleep.jpg" alt="小棕熊和小白猫睡觉"><div class="sc-cap hand">晚安，今天也辛苦啦 🌙</div></div>
     </section>
 
     <!-- ALBUM -->
     <section id="tab-album" class="hidden">
+      <div class="backbar"><button class="back-btn" data-back>← 返回</button><span class="back-title hand">日常记录</span></div>
       <div class="sec-head"><h2 class="hand">时光相册</h2><button class="btn small" id="btnAddPhoto">＋ 添加照片</button></div>
       <input type="file" id="photoFile" accept="image/*" class="hidden">
       <div class="grid" id="photoGrid"></div>
@@ -358,6 +490,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
 
     <!-- TIMELINE -->
     <section id="tab-timeline" class="hidden">
+      <div class="backbar"><button class="back-btn" data-back>← 返回</button><span class="back-title hand">回忆库</span></div>
       <div class="sec-head"><h2 class="hand">回忆时间线</h2><button class="btn small" id="btnAddMoment">＋ 添加节点</button></div>
       <div class="card"><div class="tl" id="momentList"></div>
       <div class="empty hidden" id="momentEmpty">故事线还空着<br>从第一次见面开始写吧 ✍️</div></div>
@@ -365,6 +498,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
 
     <!-- LETTERS -->
     <section id="tab-letters" class="hidden">
+      <div class="backbar"><button class="back-btn" data-back>← 返回</button><span class="back-title hand">时光信</span></div>
       <div class="sec-head"><h2 class="hand">时光信</h2><button class="btn small" id="btnAddLetter">＋ 写一封信</button></div>
       <div id="letterList"></div>
       <div class="empty hidden" id="letterEmpty">还没有时光信<br>写一封锁起来，到日子再一起拆 💌</div>
@@ -372,6 +506,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
 
     <!-- WISHES -->
     <section id="tab-wishes" class="hidden">
+      <div class="backbar"><button class="back-btn" data-back>← 返回</button><span class="back-title hand">心愿清单</span></div>
       <div class="sec-head"><h2 class="hand">⭐ 心愿清单</h2><button class="btn small" id="btnAddWish" style="background:#F5C542;color:var(--ink)">＋ 添加心愿</button></div>
       <div style="color:var(--ink-soft);font-size:13.5px;margin:-6px 0 14px">好多心愿想一起实现</div>
       <div class="stats">
@@ -391,6 +526,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
 
     <!-- BOARD -->
     <section id="tab-board" class="hidden">
+      <div class="backbar"><button class="back-btn" data-back>← 返回</button><span class="back-title hand">留言板</span></div>
       <div class="sec-head"><h2 class="hand">💬 留言板</h2></div>
       <div style="color:var(--ink-soft);font-size:13.5px;margin:-6px 0 14px">想说的话留在这里，对方打开网站就能看到</div>
       <div class="card">
@@ -403,9 +539,28 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
       <div id="msgList"></div>
       <div class="empty hidden" id="msgEmpty">留言板还空着<br>来写第一句吧 💬</div>
     </section>
+  
+    <!-- DATES -->
+    <section id="tab-dates" class="hidden">
+      <div class="backbar"><button class="back-btn" data-back>← 返回</button><span class="back-title hand">纪念日</span></div>
+      <div class="sec-head"><h2 class="hand">🎂 我们的纪念日</h2><button class="btn small" id="btnAddAnn">＋ 添加纪念日</button></div>
+      <div style="color:var(--ink-soft);font-size:13.5px;margin:-6px 0 14px">百天和周年会自动算好；想加特别的日子，点右上角添加</div>
+      <div id="dateList"></div>
+      <div class="empty hidden" id="dateEmpty">还没有纪念日<br>先在设置里填上在一起的起始日吧 🎂</div>
+    </section>
+
   </main>
-  <footer><span id="footNames">我们的小宇宙</span> · 每一天都是礼物</footer>
+  <footer><svg class="cloud-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="margin-bottom:8px"><path d="M0,34 C240,62 480,6 720,34 C960,62 1200,6 1440,34 L1440,60 L0,60 Z" fill="#F8D8D8" opacity=".6"/></svg><span id="footNames">我们的小宇宙</span> · 每一天都是礼物 ♡</footer>
 </div>
+
+
+  <nav id="bottomNav">
+    <button data-tab="home" class="active"><span>🏠</span>首页</button>
+    <button data-tab="album"><span>📷</span>日常</button>
+    <button data-tab="dates"><span>🎂</span>纪念日</button>
+    <button data-tab="wishes"><span>🌠</span>心愿</button>
+    <button data-tab="timeline"><span>💌</span>回忆</button>
+  </nav>
 
 <!-- ================= MODALS ================= -->
 <div id="modalBg" class="modal-bg hidden"><div class="modal" id="modalBox"></div></div>
@@ -803,6 +958,352 @@ function openSettings(){
     await loadAll(); renderHome(); openSettings();
   }));
 }
+
+
+/* ================= v4 overrides ================= */
+/* email for account info */
+const _loadAllV4 = loadAll;
+loadAll = async function(){
+  await _loadAllV4();
+  try{ const { data:ud } = await sb.auth.getUser(); S.email = ud && ud.user ? (ud.user.email||"") : ""; }catch(e){ S.email = ""; }
+};
+
+/* ---------- navigation with back stack ---------- */
+let currentTab = "home";
+const navStack = [];
+function goTab(name, push){
+  if(push === undefined) push = true;
+  if(name === currentTab){ window.scrollTo({top:0}); return; }
+  if(push) navStack.push(currentTab);
+  currentTab = name;
+  document.querySelectorAll("nav.pills button").forEach(b=>b.classList.toggle("active", b.dataset.tab===name));
+  document.querySelectorAll("#bottomNav button").forEach(b=>b.classList.toggle("active", b.dataset.tab===name));
+  ["home","album","timeline","letters","wishes","board","dates"].forEach(t=>{ const el=$("tab-"+t); if(el) el.classList.toggle("hidden", t!==name); });
+  window.scrollTo({top:0});
+}
+function goBack(){ const prev = navStack.pop() || "home"; goTab(prev, false); }
+document.querySelectorAll("[data-back]").forEach(b=>b.addEventListener("click", goBack));
+document.querySelectorAll("#bottomNav button").forEach(b=>b.addEventListener("click", ()=>goTab(b.dataset.tab)));
+
+/* ---------- account menu ---------- */
+$("acctBtn").addEventListener("click", e=>{ e.stopPropagation(); $("acctMenu").classList.toggle("hidden"); });
+document.addEventListener("click", e=>{ if(!$("acctMenu").classList.contains("hidden") && !e.target.closest(".acct-wrap")) $("acctMenu").classList.add("hidden"); });
+$("menuSettings").addEventListener("click", ()=>{ $("acctMenu").classList.add("hidden"); openSettings(); });
+$("menuAccount").addEventListener("click", ()=>{
+  $("acctMenu").classList.add("hidden");
+  const st = S.settings||{};
+  openModal(`<h3 class="hand">账号信息</h3>
+    <div style="line-height:2;font-size:15px">
+      <div>登录邮箱：<b>${esc(S.email||"")}</b></div>
+      <div>小宇宙成员：${esc(st.name_a||"他")} ❤ ${esc(st.name_b||"她")}</div>
+      <div>在一起的起始日：${st.start_date?fmtCN(st.start_date):"还没设置"}</div>
+      <div style="color:var(--ink-soft);font-size:13px">这个网站只有你们两个人的账号能登录，注册入口已经关闭。</div>
+    </div>
+    <div class="f-ops"><button class="btn" onclick="closeModal()">知道啦</button></div>`);
+});
+$("menuLogout").addEventListener("click", async ()=>{
+  $("acctMenu").classList.add("hidden");
+  if(!confirm("退出登录？下次进来要重新输密码哦")) return;
+  await sb.auth.signOut(); location.reload();
+});
+
+/* ---------- password visibility ---------- */
+$("pwdToggle").addEventListener("click", ()=>{
+  const p = $("authPass"); const show = p.type === "password";
+  p.type = show ? "text" : "password";
+  $("pwdToggle").textContent = show ? "🙈" : "👁";
+});
+
+/* ---------- render pipeline ---------- */
+function renderAll(){ renderHome(); renderAlbum(); renderTimeline(); renderLetters(); renderWishes(); renderBoard(); renderDates(); renderHomeWishes(); renderHomePhotos(); }
+
+/* ---------- home ---------- */
+function renderHome(){
+  const st = S.settings||{};
+  const na = st.name_a||"他", nb = st.name_b||"她";
+  $("nameA1").textContent = na; $("nameB1").textContent = nb;
+  $("footNames").textContent = na+" ❤ "+nb+"的小宇宙";
+  if(st.start_date){
+    const n = diffDays(st.start_date, todayStr())+1;
+    $("daysNum").textContent = n>0 ? n : "–";
+    $("daysFrom").textContent = "从 "+fmtCN(st.start_date)+" 开始 · "+na+" ❤ "+nb;
+  } else { $("daysNum").textContent="–"; $("daysFrom").textContent="点右上角头像 → 个人设置，填上在一起的那一天"; }
+  const nx = nextAnniversary();
+  if(nx){
+    const left = diffDays(todayStr(), nx.date);
+    $("nextTitle").textContent = left===0 ? "🎉 今天就是："+nx.title : nx.title;
+    $("nextSub").textContent = fmtCN(nx.date)+(left===0 ? " · 就是今天，好好庆祝！" : "");
+    $("nextDays").textContent = left;
+    $("nextBar").style.width = Math.round(Math.min(1,Math.max(0,nx.progress))*100)+"%";
+    $("nextCard").onclick = null;
+  } else {
+    $("nextTitle").textContent = "还没有纪念日";
+    $("nextSub").textContent = st.start_date ? "在设置里加一个自定义纪念日吧" : "先去设置里填上在一起的起始日";
+    $("nextDays").textContent = "–"; $("nextBar").style.width = "0%";
+    $("nextCard").onclick = ()=>openSettings();
+  }
+}
+
+/* ---------- anniversaries page ---------- */
+function nextOccurrence(a){
+  const t = todayStr(); const d0 = parseD(a.date); if(!d0) return null;
+  if(a.repeat==="yearly"){ let c = new Date(new Date().getFullYear(), d0.getMonth(), d0.getDate()); if(dstr(c)<t) c = new Date(c.getFullYear()+1, d0.getMonth(), d0.getDate()); return dstr(c); }
+  if(a.repeat==="monthly"){ const now = new Date(); let c = new Date(now.getFullYear(), now.getMonth(), Math.min(d0.getDate(),28)); if(dstr(c)<t) c = new Date(now.getFullYear(), now.getMonth()+1, Math.min(d0.getDate(),28)); return dstr(c); }
+  return a.date>=t ? a.date : null;
+}
+function allAnniversaries(){
+  const items = []; const t = todayStr(); const st = S.settings||{};
+  if(st.start_date){
+    const sd = st.start_date; const n = diffDays(sd, t)+1;
+    let m = Math.ceil((n+1)/100)*100;
+    for(let i=0;i<3;i++){ items.push({ title:"在一起第 "+m+" 天", date:addDays(sd, m-1), kind:"百天" }); m += 100; }
+    const sdp = parseD(sd); let cand = new Date(new Date().getFullYear(), sdp.getMonth(), sdp.getDate());
+    if(dstr(cand) < t) cand = new Date(cand.getFullYear()+1, sdp.getMonth(), sdp.getDate());
+    for(let i=0;i<2;i++){ items.push({ title:"在一起 "+(cand.getFullYear()-sdp.getFullYear())+" 周年", date:dstr(cand), kind:"周年" }); cand = new Date(cand.getFullYear()+1, sdp.getMonth(), sdp.getDate()); }
+  }
+  for(const a of S.anniversaries){
+    const nx = nextOccurrence(a);
+    if(nx) items.push({ title:a.title, date:nx, kind: a.repeat==="yearly"?"每年":a.repeat==="monthly"?"每月":"一次" });
+    else items.push({ title:a.title, date:a.date, kind:"一次", past:true });
+  }
+  items.sort((x,y)=> x.date<y.date ? -1 : 1);
+  return items;
+}
+function renderDates(){
+  const list = $("dateList"); if(!list) return; list.innerHTML = "";
+  const items = allAnniversaries();
+  $("dateEmpty").classList.toggle("hidden", items.length>0);
+  const t = todayStr();
+  for(const it of items){
+    const left = diffDays(t, it.date);
+    const div = document.createElement("div"); div.className = "card date-row" + (it.past ? " past" : "");
+    div.innerHTML = `<div class="cd-ico">${it.kind==="周年"?"🎂":"🎁"}</div>
+      <div style="min-width:0"><div class="cd-t" style="font-size:17.5px;font-weight:700">${esc(it.title)}<span class="kind-chip">${it.kind}</span></div>
+      <div class="cd-s" style="color:var(--ink-soft);font-size:13.5px;margin-top:2px">${fmtCN(it.date)}</div></div>
+      <div class="dr-r"><div class="dr-n">${it.past ? "已过去" : left===0 ? "今天！" : "还有 "+left+" 天"}</div>
+      ${it.past ? "" : `<div class="progress" style="margin-top:5px"><i style="width:${Math.round(Math.min(1,Math.max(0,1-left/365))*100)}%"></i></div>`}</div>`;
+    list.appendChild(div);
+  }
+}
+$("btnAddAnn").addEventListener("click", openSettings);
+
+/* ---------- wishes: shared toggle + home preview ---------- */
+async function toggleWish(w, btn){
+  if(btn){ btn.disabled = true; }
+  const payload = w.done ? { done:false, done_on:null } : { done:true, done_on:todayStr() };
+  const { error } = await sb.from("wishes").update(payload).eq("id", w.id);
+  if(error){ toast("操作失败："+error.message); if(btn) btn.disabled = false; return; }
+  await loadAll(); renderWishes(); renderHomeWishes();
+  if(!w.done) toast("心愿实现啦 🎉");
+}
+function renderHomeWishes(){
+  const box = $("homeWishList"); if(!box) return; box.innerHTML = "";
+  const items = [...S.wishes].sort((a,b)=> (a.done-b.done) || (a.id-b.id)).slice(0,3);
+  $("homeWishEmpty").classList.toggle("hidden", items.length>0);
+  for(const w of items){
+    const row = document.createElement("div"); row.className = "hw-row" + (w.done ? " done" : "");
+    row.innerHTML = `<button class="hw-check" title="${w.done?"取消完成":"标记实现"}">✓</button>
+      <div class="hw-t">${esc(w.title)}</div>
+      ${w.done ? `<span class="hw-done">已完成 ✓</span>` : ""}`;
+    row.querySelector(".hw-check").addEventListener("click", e=>{ e.stopPropagation(); toggleWish(w, e.currentTarget); });
+    row.addEventListener("click", ()=>goTab("wishes"));
+    box.appendChild(row);
+  }
+}
+function renderWishes(){
+  const all = S.wishes.length, done = S.wishes.filter(w=>w.done).length;
+  $("wishAll").textContent = all; $("wishDone").textContent = done; $("wishTodo").textContent = all - done;
+  document.querySelectorAll("#wishFilters button").forEach(b=>b.classList.toggle("active", b.dataset.f===wishFilter));
+  const list = $("wishList"); list.innerHTML = "";
+  const items = S.wishes.filter(w=> wishFilter==="all" ? true : wishFilter==="done" ? w.done : !w.done);
+  $("wishEmpty").classList.toggle("hidden", items.length>0);
+  for(const w of items){
+    const div = document.createElement("div"); div.className = "card wish" + (w.done ? " done" : "");
+    div.innerHTML = `${w.tag?`<span class="tag" style="background:${TAG_COLORS[w.tag]||"#F1E8DA"}">${esc(w.tag)}</span>`:""}
+      <div class="wt hand">${esc(w.title)}</div>
+      ${w.note?`<div class="wn">${esc(w.note)}</div>`:""}
+      ${w.done && w.done_on ? `<div class="wd">✓ 已实现 · ${fmtCN(w.done_on)}</div>` : ""}
+      <div class="ops"><button class="mini-btn" data-e>编辑</button><button class="mini-btn red" data-d>删除</button></div>
+      <button class="check" title="${w.done?"取消完成":"标记实现"}">✓</button>`;
+    div.querySelector("[data-e]").addEventListener("click", ()=>wishForm(w));
+    div.querySelector("[data-d]").addEventListener("click", async ()=>{
+      if(!confirm("删掉心愿「"+w.title+"」？删了就找不回来啦")) return;
+      await sb.from("wishes").delete().eq("id", w.id); await loadAll(); renderWishes(); renderHomeWishes(); toast("已删除");
+    });
+    div.querySelector(".check").addEventListener("click", e=>toggleWish(w, e.currentTarget));
+    list.appendChild(div);
+  }
+}
+
+/* ---------- album: newest first + viewer with prev/next ---------- */
+function sortedPhotos(){
+  return [...S.photos].sort((a,b)=>{
+    const da = a.taken_on||"", db = b.taken_on||"";
+    if(da !== db) return da < db ? 1 : -1;
+    return b.id - a.id;
+  });
+}
+function renderAlbum(){
+  const g = $("photoGrid"); g.innerHTML = "";
+  const items = sortedPhotos();
+  $("photoEmpty").classList.toggle("hidden", items.length>0);
+  items.forEach((p, idx)=>{
+    const div = document.createElement("div"); div.className = "ph";
+    div.innerHTML = `<img src="${esc(p.url)}" alt="" loading="lazy"><div class="cap">${esc(p.caption||"我们的照片")}<div class="d">${p.taken_on?fmtCN(p.taken_on):""}</div></div>`;
+    div.addEventListener("click", ()=>viewPhoto(p, idx));
+    g.appendChild(div);
+  });
+}
+function renderHomePhotos(){
+  const strip = $("homePhotos"); if(!strip) return; strip.innerHTML = "";
+  const items = sortedPhotos().slice(0,4);
+  $("homePhotoEmpty").classList.toggle("hidden", items.length>0);
+  items.forEach((p, idx)=>{
+    const div = document.createElement("div"); div.className = "ph";
+    div.innerHTML = `<img src="${esc(p.url)}" alt="" loading="lazy"><div class="cap">${esc(p.caption||"我们的照片")}<div class="d">${p.taken_on?fmtCN(p.taken_on):""}</div></div>`;
+    div.addEventListener("click", ()=>viewPhoto(p, idx));
+    strip.appendChild(div);
+  });
+}
+let photoIdx = 0;
+function viewPhoto(p, idx){
+  const items = sortedPhotos();
+  photoIdx = (typeof idx === "number") ? idx : Math.max(0, items.findIndex(x=>x.id===p.id));
+  showPhoto();
+}
+function showPhoto(){
+  const items = sortedPhotos(); const p = items[photoIdx]; if(!p) return;
+  openModal(`<img class="view-img" id="viewerImg" src="${esc(p.url)}">
+    <div style="margin-top:12px;font-size:17px" class="hand">${esc(p.caption||"我们的照片")}</div>
+    <div style="color:var(--ink-soft);font-size:13px;margin-top:3px">${p.taken_on?fmtCN(p.taken_on):""}</div>
+    <div class="viewer-nav">
+      <button class="vn-btn" id="pvPrev">← 上一张</button>
+      <span class="vn-c">${photoIdx+1} / ${items.length}</span>
+      <button class="vn-btn" id="pvNext">下一张 →</button>
+    </div>
+    <div class="f-ops"><button class="btn danger" id="pvDel">删除</button><button class="btn ghost" id="pvEdit">改配文</button><button class="btn" onclick="closeModal()">返回</button></div>`);
+  const step = d => { photoIdx = (photoIdx + d + items.length) % items.length; showPhoto(); };
+  $("pvPrev").addEventListener("click", ()=>step(-1));
+  $("pvNext").addEventListener("click", ()=>step(1));
+  const img = $("viewerImg"); let sx = null;
+  img.addEventListener("touchstart", e=>{ sx = e.touches[0].clientX; }, { passive:true });
+  img.addEventListener("touchend", e=>{ if(sx===null) return; const dx = e.changedTouches[0].clientX - sx; sx = null; if(Math.abs(dx) > 42) step(dx < 0 ? 1 : -1); }, { passive:true });
+  $("pvDel").addEventListener("click", async ()=>{
+    if(!confirm("删掉照片「"+(p.caption||"我们的照片")+"」？删了就找不回来啦")) return;
+    await sb.storage.from("photos").remove([p.storage_path]);
+    await sb.from("photos").delete().eq("id", p.id);
+    closeModal(); await loadAll(); renderAlbum(); renderHomePhotos(); toast("已删除");
+  });
+  $("pvEdit").addEventListener("click", ()=>{
+    openModal(`<h3 class="hand">改配文</h3>
+      <div class="f-row"><label>配文</label><input id="peCap" value="${esc(p.caption||"")}"></div>
+      <div class="f-row"><label>拍摄日期</label><input id="peDate" type="date" value="${p.taken_on||""}"></div>
+      <div class="f-ops"><button class="btn ghost" id="peBack">返回</button><button class="btn" id="peSave">保存</button></div>`);
+    $("peBack").addEventListener("click", showPhoto);
+    $("peSave").addEventListener("click", async ()=>{
+      const { error } = await sb.from("photos").update({ caption:$("peCap").value.trim(), taken_on:$("peDate").value||null }).eq("id", p.id);
+      if(error) return toast("保存失败："+error.message);
+      await loadAll(); renderAlbum(); renderHomePhotos(); showPhoto(); toast("改好啦");
+    });
+  });
+}
+
+/* ---------- timeline: newest first + collapsible notes ---------- */
+function renderTimeline(){
+  const list = $("momentList"); list.innerHTML = "";
+  const items = [...S.moments].reverse();
+  $("momentEmpty").classList.toggle("hidden", items.length>0);
+  for(const m of items){
+    const div = document.createElement("div"); div.className = "node";
+    const long = (m.note||"").length > 70;
+    div.innerHTML = `<div class="nd">${fmtCN(m.date)}</div><div class="nt hand">${esc(m.title)}</div>
+      ${m.note ? (long
+        ? `<div class="nn"><span data-short>${esc(m.note.slice(0,70))}…</span><span data-full class="hidden">${esc(m.note)}</span><button class="more" data-x>展开</button></div>`
+        : `<div class="nn">${esc(m.note)}</div>`) : ""}
+      <div class="ops"><button class="mini-btn" data-e>编辑</button><button class="mini-btn red" data-d>删除</button></div>`;
+    const xb = div.querySelector("[data-x]");
+    if(xb) xb.addEventListener("click", ()=>{
+      const full = div.querySelector("[data-full]"), short = div.querySelector("[data-short]");
+      const showingFull = !full.classList.contains("hidden");
+      full.classList.toggle("hidden", showingFull);
+      short.classList.toggle("hidden", !showingFull);
+      xb.textContent = showingFull ? "展开" : "收起";
+    });
+    div.querySelector("[data-e]").addEventListener("click", ()=>momentForm(m));
+    div.querySelector("[data-d]").addEventListener("click", async ()=>{
+      if(!confirm("删掉回忆「"+m.title+"」？")) return;
+      await sb.from("moments").delete().eq("id", m.id); await loadAll(); renderTimeline(); toast("已删除");
+    });
+    list.appendChild(div);
+  }
+}
+
+/* ---------- letters: locked badge ---------- */
+function renderLetters(){
+  const list = $("letterList"); list.innerHTML = "";
+  $("letterEmpty").classList.toggle("hidden", S.letters.length>0);
+  for(const l of S.letters){
+    const locked = letterLocked(l);
+    const div = document.createElement("div"); div.className = "card letter"; div.style.cursor = "pointer";
+    div.innerHTML = `<div class="env">${locked?"🔒":"💌"}</div>
+      <div style="flex:1;min-width:0"><div class="lt hand">${esc(l.title||"一封信")}</div>
+      <div class="lm">写于 ${fmtCN((l.created_at||"").slice(0,10))} · ${l.unlock_on?("解锁日 "+fmtCN(l.unlock_on)):"随时可拆"}</div></div>
+      ${locked?`<img class="lock-badge" src="img/sleep.jpg" alt="">`:""}
+      <div class="seal ${locked?"":"open"}">${locked?"封存中":"可拆开"}</div>`;
+    div.addEventListener("click", ()=>viewLetter(l));
+    list.appendChild(div);
+  }
+}
+function viewLetter(l){
+  const locked = letterLocked(l);
+  if(locked){
+    openModal(`<div style="text-align:center;padding:8px 0">
+      <img src="img/sleep.jpg" style="width:100%;border-radius:15px;border:2px solid var(--line)" alt="">
+      <h3 class="hand" style="margin:12px 0 8px">${esc(l.title||"一封信")}</h3>
+      <p style="color:var(--ink-soft);line-height:1.8">这封信还在时光里封存着，小棕熊和小白猫守着它<br>到 <b>${fmtCN(l.unlock_on)}</b> 才能拆开<br>还有 ${diffDays(todayStr(), l.unlock_on)} 天，慢慢等 🌙</p>
+      <div class="f-ops" style="justify-content:center"><button class="btn danger" id="lvDel">删除这封信</button><button class="btn" onclick="closeModal()">返回</button></div></div>`);
+  } else {
+    openModal(`<h3 class="hand">${esc(l.title||"一封信")}</h3>
+      <div class="letter-body">${esc(l.body)}</div>
+      <div style="color:var(--ink-soft);font-size:13px;margin-top:10px">写于 ${fmtCN((l.created_at||"").slice(0,10))}</div>
+      <div class="f-ops"><button class="btn danger" id="lvDel">删除</button><button class="btn" onclick="closeModal()">返回</button></div>`);
+  }
+  $("lvDel").addEventListener("click", async ()=>{
+    if(!confirm("删掉这封信「"+(l.title||"一封信")+"」？")) return;
+    await sb.from("letters").delete().eq("id", l.id); closeModal(); await loadAll(); renderLetters(); toast("已删除");
+  });
+}
+
+/* ---------- board: character avatars ---------- */
+function renderBoard(){
+  $("meName").textContent = S.me || "我";
+  const list = $("msgList"); list.innerHTML = "";
+  $("msgEmpty").classList.toggle("hidden", S.messages.length>0);
+  const bearName = (S.settings && S.settings.name_a) || "程锦";
+  for(const m of S.messages){
+    const isBear = m.author_name === bearName;
+    const div = document.createElement("div"); div.className = "msg";
+    div.innerHTML = `<div class="av ${isBear?"av-bear":"av-cat"}"></div>
+      <div class="mb"><div class="mh">${esc(m.author_name||"")} · ${(m.created_at||"").slice(0,10)} ${(m.created_at||"").slice(11,16)}<button class="mini-btn red mdel" data-d>删除</button></div>
+      <div class="mt">${esc(m.body)}</div></div>`;
+    div.querySelector("[data-d]").addEventListener("click", async ()=>{
+      if(!confirm("删掉这条留言？")) return;
+      await sb.from("messages").delete().eq("id", m.id); await loadAll(); renderBoard(); toast("已删除");
+    });
+    list.appendChild(div);
+  }
+}
+
+/* ---------- boot loader ---------- */
+(function(){
+  const iv = setInterval(()=>{
+    const appVisible = !$("appView").classList.contains("hidden");
+    const authVisible = !$("authView").classList.contains("hidden");
+    if(appVisible || authVisible){ const b = $("bootLoad"); if(b) b.style.display = "none"; clearInterval(iv); }
+  }, 250);
+  setTimeout(()=>{ const b = $("bootLoad"); if(b) b.style.display = "none"; clearInterval(iv); }, 6000);
+})();
+
 
 /* ---------- boot ---------- */
 (async ()=>{
