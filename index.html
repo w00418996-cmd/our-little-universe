@@ -647,8 +647,9 @@ $("btnLogin").addEventListener("click", async ()=>{
   const email=$("authEmail").value.trim(), pass=$("authPass").value;
   if(!email||!pass) return authMsg("先填邮箱和密码");
   authMsg("登录中…", true);
-  const { error } = await sb.auth.signInWithPassword({ email, password:pass });
-  if(error) return authMsg("登录失败："+errText(error));
+  let error = null;
+  try{ ({ error } = await sb.auth.signInWithPassword({ email, password:pass })); }catch(e){ error = e; }
+  if(error){ const info = errInfo(error, "login"); return authMsg("登录失败："+info.msg+(info.showDiag ? "（诊断："+info.diag+"）" : "")); }
   authMsg(""); enterApp();
 });
 $("btnGoRegister").addEventListener("click", async ()=>{
@@ -656,13 +657,36 @@ $("btnGoRegister").addEventListener("click", async ()=>{
   if(!email||!pass) return authMsg("先填邮箱和密码，再点注册");
   if(pass.length<6) return authMsg("密码至少 6 位");
   authMsg("注册中…", true);
-  const { data, error } = await sb.auth.signUp({ email, password:pass });
-  if(error) return authMsg("注册失败："+errText(error));
+  let data = null, error = null;
+  try{ ({ data, error } = await sb.auth.signUp({ email, password:pass })); }catch(e){ error = e; }
+  if(error){ const info = errInfo(error, "signup"); return authMsg("注册失败："+info.msg+(info.showDiag ? "（诊断："+info.diag+"）" : "")); }
   if(data.session){ authMsg(""); enterApp(); }
   else authMsg("注册好了！去邮箱点一下确认链接，然后回来登录。", true);
 });
-function errText(e){ const m=e.message||""; if(m.includes("Invalid login")) return "邮箱或密码不对"; if(m.includes("already registered")) return "这个邮箱已经注册过，直接登录"; if(m.includes("Email not confirmed")) return "邮箱还没确认，先去邮箱点确认链接"; return m; }
-$("btnLogout").addEventListener("click", async ()=>{ await sb.auth.signOut(); location.reload(); });
+function errInfo(e, stage){
+  const m = (e && e.message) || "";
+  const name = (e && e.name) || "Error";
+  const status = (e && e.status) || 0;
+  const diag = name + (status ? "/" + status : "");
+  try{ console.warn("[auth-diag]", stage || "", name, status); }catch(_){ }
+  if(name === "AuthRetryableFetchError" || m === "Load failed" || m.includes("Failed to fetch") || m.includes("NetworkError") || m.includes("network"))
+    return { msg:"网络连接失败，暂时连不上服务器。请检查网络，或换个网络（Wi-Fi / 流量）再试", diag, showDiag:true };
+  if(m.includes("Invalid login")) return { msg:"邮箱或密码不正确", diag, showDiag:false };
+  if(m.includes("already registered")) return { msg:"这个邮箱已经注册过啦，直接登录就好", diag, showDiag:false };
+  if(m.includes("Email not confirmed")) return { msg:"邮箱还没确认，先去邮箱点确认链接", diag, showDiag:false };
+  if(m.includes("Signups not allowed") || m.includes("signups are disabled") || m.includes("signup is disabled")) return { msg:"注册通道已经关闭啦", diag, showDiag:false };
+  if(status === 429 || m.includes("rate limit") || m.includes("Too many")) return { msg:"试得太频繁啦，等一会儿再试", diag, showDiag:false };
+  if(m.toLowerCase().includes("password") && (m.includes("6") || m.toLowerCase().includes("weak") || m.toLowerCase().includes("short"))) return { msg:"密码至少要 6 位", diag, showDiag:false };
+  if(status >= 500) return { msg:"登录服务暂时不可用，请稍后再试", diag, showDiag:true };
+  return { msg:(m || "出了点小问题，请再试一次"), diag, showDiag:true };
+}
+function errText(e){ return errInfo(e).msg; }
+async function doLogout(){
+  try{ await Promise.race([ sb.auth.signOut({ scope:"local" }), new Promise(r=>setTimeout(r, 2500)) ]); }catch(e){ }
+  try{ Object.keys(localStorage).filter(k=>k.indexOf("sb-")===0).forEach(k=>localStorage.removeItem(k)); }catch(e){ }
+  location.reload();
+}
+$("btnLogout").addEventListener("click", ()=>{ doLogout(); });
 
 /* ---------- data ---------- */
 async function loadAll(){
@@ -1010,9 +1034,10 @@ function openSettings(){
     if(p1.length < 6){ msg.textContent = "新密码至少 6 位"; return; }
     if(p1 !== p2){ msg.textContent = "两次输入不一致，再检查一下"; return; }
     const btn = $("pwSave"); btn.disabled = true; btn.textContent = "修改中…";
-    const { error } = await sb.auth.updateUser({ password:p1 });
+    let error = null;
+    try{ ({ error } = await sb.auth.updateUser({ password:p1 })); }catch(e){ error = e; }
     btn.disabled = false; btn.textContent = "修改密码";
-    if(error){ msg.textContent = "修改失败：" + error.message; return; }
+    if(error){ const info = errInfo(error, "changePassword"); msg.textContent = "修改失败：" + info.msg + (info.showDiag ? "（诊断：" + info.diag + "）" : ""); return; }
     $("pwNew").value = ""; $("pwNew2").value = "";
     msg.textContent = "密码改好啦，下次登录用新密码";
     toast("密码已修改 🔑");
@@ -1075,7 +1100,7 @@ $("menuAccount").addEventListener("click", ()=>{
 $("menuLogout").addEventListener("click", async ()=>{
   $("acctMenu").classList.add("hidden");
   if(!confirm("退出登录？下次进来要重新输密码哦")) return;
-  await sb.auth.signOut(); location.reload();
+  await doLogout();
 });
 
 /* ---------- password visibility ---------- */
