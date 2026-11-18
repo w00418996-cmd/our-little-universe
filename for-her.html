@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>我们的小宇宙 · 给薏冰</title>
+<style>
+  :root{
+    --cream:#fdf6ec; --paper:#fffaf1; --ink:#5b4632; --ink2:#8a715a;
+    --accent:#e8956d; --accent2:#f6c390; --line:#e8d5bd; --pink:#f7d9d4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{background:var(--cream);color:var(--ink);font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.6}
+  img{display:block;max-width:100%}
+  .wrap{max-width:560px;margin:0 auto;padding:0 16px 40px}
+
+  /* ---------- gate ---------- */
+  #gate{position:fixed;inset:0;background:var(--cream);z-index:200;display:flex;align-items:center;justify-content:center;padding:24px}
+  #gate .card{background:var(--paper);border:2px solid var(--line);border-radius:24px;padding:28px 22px;text-align:center;max-width:340px;width:100%;box-shadow:0 10px 30px rgba(150,110,70,.15)}
+  #gate img{width:150px;height:150px;object-fit:cover;border-radius:50%;margin:0 auto 14px;border:3px solid var(--pink)}
+  #gate h1{font-size:22px;letter-spacing:2px;margin-bottom:6px}
+  #gate p{color:var(--ink2);font-size:14px;margin-bottom:16px}
+  #gate input{width:100%;padding:13px;font-size:18px;text-align:center;letter-spacing:4px;border:2px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);outline:none}
+  #gate input:focus{border-color:var(--accent)}
+  #gate button{width:100%;margin-top:12px;padding:13px;font-size:16px;border:none;border-radius:14px;background:linear-gradient(180deg,var(--accent2),var(--accent));color:#fff;letter-spacing:2px;cursor:pointer}
+  #gate .err{color:#d9534f;font-size:13px;min-height:20px;margin-top:8px}
+  #gate .hint{font-size:12px;color:var(--ink2);margin-top:4px}
+
+  /* ---------- hero ---------- */
+  header{text-align:center;padding:26px 0 6px}
+  header .heroimg{width:100%;border-radius:22px;border:2px solid var(--line);object-fit:cover;max-height:300px}
+  header h1{font-size:27px;letter-spacing:3px;margin-top:18px}
+  header .slogan{color:var(--ink2);font-size:14px;margin-top:4px}
+  .names{font-size:19px;margin-top:16px;letter-spacing:1px}
+  .names .heart{color:#e56b6f}
+  .days{font-size:64px;font-weight:700;line-height:1.15;color:var(--ink)}
+  .days small{font-size:20px;font-weight:400;color:var(--ink2)}
+  .daylabel{color:var(--ink2);font-size:14px}
+  .countcard{margin:18px auto 0;background:var(--paper);border:2px dashed var(--accent);border-radius:18px;padding:14px 18px;max-width:420px}
+  .countcard .t{font-size:15px}
+  .countcard .n{font-size:26px;font-weight:700;color:var(--accent)}
+  .countcard .d{font-size:13px;color:var(--ink2)}
+
+  section{margin-top:34px}
+  section h2{font-size:20px;letter-spacing:2px;display:flex;align-items:center;gap:8px}
+  section h2::after{content:"";flex:1;border-top:2px dotted var(--line)}
+  section .sub{color:var(--ink2);font-size:13px;margin:4px 0 14px}
+
+  /* ---------- album ---------- */
+  .daycard{background:var(--paper);border:2px solid var(--line);border-radius:20px;padding:12px;margin-bottom:16px}
+  .daycard .date{font-size:13px;color:var(--ink2);margin:2px 2px 10px}
+  .daycard .row{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
+  .daycard .row img{height:190px;width:auto;max-width:82%;object-fit:cover;border-radius:14px;scroll-snap-align:start;cursor:pointer;flex:none}
+  .daycard .single img{height:auto;max-height:340px;width:100%}
+  .daycard .cap{font-size:14px;margin-top:8px;padding:0 2px}
+  .daycard .cnt{font-size:12px;color:var(--ink2)}
+
+  /* ---------- moments ---------- */
+  .moment{background:var(--paper);border:2px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:16px}
+  .moment img{width:100%;max-height:300px;object-fit:cover;cursor:pointer}
+  .moment .body{padding:14px 16px}
+  .moment .mdate{font-size:12px;color:var(--ink2)}
+  .moment h3{font-size:17px;margin:2px 0 6px}
+  .moment p{font-size:14px;color:var(--ink);white-space:pre-wrap}
+
+  /* ---------- anniversaries / wishes ---------- */
+  .ann,.wish{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:12px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .ann .tt,.wish .tt{font-size:16px}
+  .ann .dd,.wish .tag{font-size:12px;color:var(--ink2)}
+  .ann .left{font-size:14px;color:var(--accent);font-weight:700;white-space:nowrap}
+  .wish .note{font-size:13px;color:var(--ink2)}
+  .wish .st{font-size:12px;color:var(--accent);border:1.5px solid var(--accent);border-radius:999px;padding:2px 10px;white-space:nowrap}
+  .empty{background:var(--paper);border:2px dashed var(--line);border-radius:16px;padding:16px;text-align:center;color:var(--ink2);font-size:14px}
+
+  footer{text-align:center;color:var(--ink2);font-size:13px;margin-top:38px;line-height:1.9}
+  footer .big{font-size:14px;color:var(--ink)}
+
+  /* ---------- viewer ---------- */
+  #viewer{position:fixed;inset:0;background:rgba(30,20,12,.94);z-index:300;display:none;align-items:center;justify-content:center}
+  #viewer.open{display:flex}
+  #viewer img{max-width:100%;max-height:88vh;object-fit:contain}
+  #viewer .nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,250,241,.15);color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:22px;cursor:pointer}
+  #viewer .prev{left:10px}#viewer .next{right:10px}
+  #viewer .cnt{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:#fff;font-size:14px}
+  #viewer .close{position:absolute;top:16px;right:16px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer}
+</style>
+</head>
+<body>
+
+<!-- 口令门 -->
+<div id="gate">
+  <div class="card">
+    <img src="img/pair-front.jpg" alt="">
+    <h1>我们的小宇宙</h1>
+    <p>这个小页面，只给薏冰看 ♡</p>
+    <input id="gateInput" type="tel" inputmode="numeric" maxlength="8" placeholder="输入 8 位数字">
+    <div class="hint">提示：我们在一起的那一天</div>
+    <button id="gateBtn">进去看看</button>
+    <div class="err" id="gateErr"></div>
+  </div>
+</div>
+
+<div class="wrap" id="app" style="display:none">
+  <header>
+    <img class="heroimg" src="img/hero-sunset.jpg" alt="">
+    <h1>我们的小宇宙</h1>
+    <div class="slogan">把平凡的日子，慢慢写成我们的故事。</div>
+    <div class="names">程锦 <span class="heart">❤</span> 薏冰</div>
+    <div class="daylabel">我们已经一起走过</div>
+    <div class="days"><span id="dayCount">–</span><small> 天</small></div>
+    <div class="daylabel">从 2026 年 7 月 29 日开始</div>
+    <div class="countcard">
+      <div class="t">下一个纪念日 · <span id="nextName">–</span></div>
+      <div class="n">还有 <span id="nextDays">–</span> 天</div>
+      <div class="d" id="nextDate"></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>📷 日常记录</h2>
+    <div class="sub">我们的相册，点开照片可以左右翻看。</div>
+    <div id="album"></div>
+  </section>
+
+  <section>
+    <h2>🌠 回忆</h2>
+    <div class="sub">属于我们的故事，一页一页慢慢写。</div>
+    <div id="moments"></div>
+  </section>
+
+  <section>
+    <h2>🎂 纪念日</h2>
+    <div class="sub">每一个值得记住的日子。</div>
+    <div id="anns"></div>
+  </section>
+
+  <section>
+    <h2>⭐ 心愿清单</h2>
+    <div class="sub">说好的事，一件一件慢慢实现。</div>
+    <div id="wishes"></div>
+  </section>
+
+  <section>
+    <h2>💌 留言板</h2>
+    <div class="empty">留言板还空着，等你们来写第一句。</div>
+  </section>
+
+  <section>
+    <h2>✉️ 时光信</h2>
+    <div class="empty">时光信还没有写下第一封。</div>
+  </section>
+
+  <footer>
+    <div class="big">日子很长，故事很慢。幸好，我们可以一起写下去。♡</div>
+    <div>这是程锦给薏冰准备的只读小页面 · 内容截至 2026 年 11 月 18 日</div>
+  </footer>
+</div>
+
+<!-- 照片查看器 -->
+<div id="viewer">
+  <button class="close" id="vClose">×</button>
+  <button class="nav prev" id="vPrev">‹</button>
+  <img id="vImg" src="" alt="">
+  <button class="nav next" id="vNext">›</button>
+  <div class="cnt" id="vCnt"></div>
+</div>
+
+<script>
+/* ---------------- 数据（2026-11-18 从主站打包） ---------------- */
+var START = "2026-07-29";
+var GROUPS = [
+  {date:"2026-09-01", cap:"", photos:["1794996034030_m0_1000091880.jpg","1794996070878_m1_1000092631.jpg","1794996124507_m2_1000092627.jpg","1794996242949_g0_1000091881.jpg"]},
+  {date:"2026-08-31", cap:"红油米粉、鸡蛋抄手是谁喜欢吃的呀", photos:["1794995362044_0_1000095142.jpg","1794995367931_1_1000095141.jpg"]},
+  {date:"2026-08-27", cap:"", photos:["1794992585186_m0_1000091771.jpg","1794992591741_m1_1000091879.jpg","1794992594686_m2_1000091770.jpg"]},
+  {date:"2026-08-19", cap:"七夕", photos:["1794972103921_1000091191_9_9l56.png"]},
+  {date:"2026-08-18", cap:"", photos:["1794984008380_0_1000095135.jpg","1794993389710_g0_1000095136.jpg","1794993398336_g1_1000095133.jpg"]},
+  {date:"2026-08-17", cap:"我们第一次面啦", photos:["1794988640405_m0_1000091234.jpg","1794988654667_m1_1000091135.jpg","1794988658220_m2_1000091139.jpg","1794988668787_m3_1000091143.jpg","1794990651295_g1_1000091137.jpg","1794990671412_g2_1000091128.jpg"]},
+  {date:"2026-08-08", cap:"她说：我不听承诺，只看行动，但我愿意相信你", photos:["1794972130013_1000091316_10_egx4.jpg"]},
+  {date:"2026-07-29", cap:"", photos:["1794987490568_m_1000091497.jpg"]}
+];
+var MOMENTS = [
+  {date:"2026-09-01", title:"第一次去你家", note:"女孩子的房间原来是是这样的，哈哈，我们一起去欢乐谷，一起吃美蛙都很好吃（某人还说要请我吃）玩的很开心，这也是我第一次去欢乐谷，很高兴是和你一起", photo:"1794996034030_m0_1000091880.jpg"},
+  {date:"2026-08-27", title:"我们终于有属于自己的对戒了", note:"离 17 号才过十天，你一句想我我就来了，很开心我们有属于自己的对戒啦，也出现了些小意外，人生中第一次被车撞了😭", photo:"1794992585186_m0_1000091771.jpg"},
+  {date:"2026-08-19", title:"七夕", note:"虽然不能陪在你身边，但给你准备了小礼物，宝宝不要嫌弃", photo:"1794972103921_1000091191_9_9l56.png"},
+  {date:"2026-08-17", title:"第一次见面", note:"第一次来重庆，我们一起吃小面，看电影，逛罗汉寺，一起撸猫，咳咳牵手耳朵都会红的男孩子不多见了", photo:"1794988640405_m0_1000091234.jpg"},
+  {date:"2026-08-08", title:"我的小女孩", note:"她说自己不擅长表达，从小被宠着，有点傲娇，不容易低头。她说：“我不听承诺，只看行动，但我愿意相信你，宝宝。”", photo:"1794972130013_1000091316_10_egx4.jpg"},
+  {date:"2026-07-29", title:"故事的开始", note:"我不相信缘分，直到这一天，和往常一样无聊的看手机，遇到了你……", photo:"1794987490568_m_1000091497.jpg"}
+];
+var ANNS = [
+  {title:"跨年", date:"2026-12-31", repeat:"once"},
+  {title:"薏冰生日", date:"2006-04-29", repeat:"yearly"},
+  {title:"程锦生日", date:"2007-01-11", repeat:"yearly"}
+];
+var WISHES = [
+  {title:"养一只小狗", note:"它的名字就叫八月吧", tag:"生活", done:false},
+  {title:"给宝宝买黄金", note:"每年哦", tag:"生活", done:false},
+  {title:"去大理旅行", note:"", tag:"旅行", done:false}
+];
+
+/* ---------------- 工具 ---------------- */
+function $(id){return document.getElementById(id)}
+function shanghaiToday(){
+  var s = new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Shanghai",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+  var p = s.split("-"); return new Date(+p[0], +p[1]-1, +p[2]);
+}
+function parseD(str){ var p=str.split("-"); return new Date(+p[0], +p[1]-1, +p[2]); }
+function fmtD(d){ return d.getFullYear()+" 年 "+(d.getMonth()+1)+" 月 "+d.getDate()+" 日"; }
+function diffDays(a,b){ return Math.round((b-a)/86400000); }
+function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+
+/* ---------------- 口令门 ---------------- */
+function openApp(){ $("gate").style.display="none"; $("app").style.display="block"; }
+function tryGate(){
+  if($("gateInput").value.trim()==="20260729"){
+    try{ localStorage.setItem("forher-ok","1"); }catch(e){}
+    openApp();
+  } else {
+    $("gateErr").textContent="不对哦，再想想我们是哪一天在一起的 ♡";
+  }
+}
+$("gateBtn").addEventListener("click", tryGate);
+$("gateInput").addEventListener("keydown", function(e){ if(e.key==="Enter") tryGate(); });
+try{ if(localStorage.getItem("forher-ok")==="1") openApp(); }catch(e){}
+
+/* ---------------- 首页 ---------------- */
+var today = shanghaiToday();
+var start = parseD(START);
+$("dayCount").textContent = diffDays(start, today) + 1;
+
+function nextOccurrences(){
+  var list = [];
+  ANNS.forEach(function(a){
+    var d = parseD(a.date);
+    if(a.repeat==="yearly"){
+      var cand = new Date(today.getFullYear(), d.getMonth(), d.getDate());
+      if(diffDays(today, cand) < 0) cand = new Date(today.getFullYear()+1, d.getMonth(), d.getDate());
+      list.push({title:a.title, date:cand});
+    } else {
+      if(diffDays(today, d) >= 0) list.push({title:a.title, date:d});
+    }
+  });
+  var d200 = new Date(start); d200.setDate(d200.getDate()+199);
+  if(diffDays(today, d200) >= 0) list.push({title:"第 200 天", date:d200});
+  var anniv = new Date(today.getFullYear(), start.getMonth(), start.getDate());
+  if(diffDays(start, anniv) <= 0 || diffDays(today, anniv) < 0) anniv = new Date(today.getFullYear()+1, start.getMonth(), start.getDate());
+  list.push({title:"一周年", date:anniv});
+  list.sort(function(x,y){ return x.date - y.date; });
+  return list;
+}
+var occ = nextOccurrences();
+if(occ.length){
+  $("nextName").textContent = occ[0].title;
+  $("nextDays").textContent = diffDays(today, occ[0].date);
+  $("nextDate").textContent = fmtD(occ[0].date);
+}
+
+/* ---------------- 相册 ---------------- */
+var ALL = [];
+var albumHtml = "";
+GROUPS.forEach(function(g){
+  albumHtml += '<div class="daycard"><div class="date">'+g.date.replace(/-/g," / ")+(g.photos.length>1 ? ' · <span class="cnt">'+g.photos.length+' 张</span>' : '')+'</div>';
+  albumHtml += '<div class="row'+(g.photos.length===1?' single':'')+'">';
+  g.photos.forEach(function(p){
+    var idx = ALL.length; ALL.push(p);
+    albumHtml += '<img loading="lazy" src="snap/'+p+'" data-idx="'+idx+'" alt="">';
+  });
+  albumHtml += '</div>';
+  if(g.cap) albumHtml += '<div class="cap">'+esc(g.cap)+'</div>';
+  albumHtml += '</div>';
+});
+$("album").innerHTML = albumHtml;
+
+/* ---------------- 回忆 ---------------- */
+$("moments").innerHTML = MOMENTS.map(function(m){
+  return '<div class="moment"><img loading="lazy" src="snap/'+m.photo+'" data-photo="'+m.photo+'" alt="">'
+    + '<div class="body"><div class="mdate">'+m.date.replace(/-/g," / ")+'</div>'
+    + '<h3>'+esc(m.title)+'</h3><p>'+esc(m.note)+'</p></div></div>';
+}).join("");
+
+/* ---------------- 纪念日 ---------------- */
+$("anns").innerHTML = occ.map(function(o){
+  var left = diffDays(today, o.date);
+  return '<div class="ann"><div><div class="tt">'+esc(o.title)+'</div><div class="dd">'+fmtD(o.date)+'</div></div>'
+    + '<div class="left">'+(left===0 ? "就是今天 ♡" : "还有 "+left+" 天")+'</div></div>';
+}).join("");
+
+/* ---------------- 心愿 ---------------- */
+$("wishes").innerHTML = WISHES.map(function(w){
+  return '<div class="wish"><div><div class="tt">'+esc(w.title)+'</div>'
+    + (w.note ? '<div class="note">'+esc(w.note)+'</div>' : '')
+    + '<div class="tag"># '+esc(w.tag)+'</div></div>'
+    + '<div class="st">'+(w.done ? "已实现 ♡" : "待实现")+'</div></div>';
+}).join("");
+
+/* ---------------- 查看器 ---------------- */
+var cur = 0;
+function show(i){
+  cur = (i + ALL.length) % ALL.length;
+  $("vImg").src = "snap/" + ALL[cur];
+  $("vCnt").textContent = (cur+1) + " / " + ALL.length;
+  $("viewer").classList.add("open");
+}
+document.addEventListener("click", function(e){
+  var t = e.target;
+  if(t.tagName==="IMG" && t.dataset.idx !== undefined){ show(+t.dataset.idx); }
+  else if(t.tagName==="IMG" && t.dataset.photo){ var i = ALL.indexOf(t.dataset.photo); if(i>=0) show(i); }
+});
+$("vPrev").addEventListener("click", function(e){ e.stopPropagation(); show(cur-1); });
+$("vNext").addEventListener("click", function(e){ e.stopPropagation(); show(cur+1); });
+$("vClose").addEventListener("click", function(){ $("viewer").classList.remove("open"); });
+$("viewer").addEventListener("click", function(e){ if(e.target.id==="viewer") $("viewer").classList.remove("open"); });
+var tx = null;
+$("viewer").addEventListener("touchstart", function(e){ tx = e.touches[0].clientX; });
+$("viewer").addEventListener("touchend", function(e){
+  if(tx===null) return;
+  var dx = e.changedTouches[0].clientX - tx;
+  if(dx < -40) show(cur+1); else if(dx > 40) show(cur-1);
+  tx = null;
+});
+</script>
+</body>
+</html>
