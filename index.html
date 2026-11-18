@@ -987,6 +987,11 @@ function openSettings(){
     <div class="f-row"><label>她的名字</label><input id="stB" value="${esc(st.name_b||"")}"></div>
     <div class="f-row"><label>在一起的起始日</label><input id="stStart" type="date" value="${st.start_date||""}"></div>
     <div class="f-ops" style="justify-content:flex-start;margin:0 0 18px"><button class="btn" id="stSave">保存设置</button></div>
+    <h3 class="hand" style="font-size:19px">修改密码</h3>
+    <div class="f-row"><label>新密码</label><input id="pwNew" type="password" placeholder="至少 6 位，建议纯字母+数字" autocomplete="new-password"></div>
+    <div class="f-row"><label>再输一遍</label><input id="pwNew2" type="password" placeholder="再输一遍新密码" autocomplete="new-password"></div>
+    <div id="pwMsg" style="font-size:13px;color:var(--ink-soft);margin:-4px 0 10px"></div>
+    <div class="f-ops" style="justify-content:flex-start;margin:0 0 18px"><button class="btn ghost" id="pwSave">修改密码</button></div>
     <h3 class="hand" style="font-size:19px">自定义纪念日</h3>
     <div id="annList">${annRows||'<div style="color:var(--ink-soft);font-size:13.5px;margin-bottom:10px">还没有自定义纪念日（百天和周年会自动算）</div>'}</div>
     <div class="f-row"><label>名称</label><input id="anTitle" placeholder="比如：第一次牵手纪念日"></div>
@@ -998,6 +1003,19 @@ function openSettings(){
     const { error } = await sb.from("settings").update(payload).eq("id",1);
     if(error) return toast("保存失败："+error.message);
     await loadAll(); renderAll(); toast("设置好啦 ⚙️");
+  });
+  $("pwSave").addEventListener("click", async ()=>{
+    const p1 = $("pwNew").value, p2 = $("pwNew2").value, msg = $("pwMsg");
+    if(!p1){ msg.textContent = "先输入新密码"; return; }
+    if(p1.length < 6){ msg.textContent = "新密码至少 6 位"; return; }
+    if(p1 !== p2){ msg.textContent = "两次输入不一致，再检查一下"; return; }
+    const btn = $("pwSave"); btn.disabled = true; btn.textContent = "修改中…";
+    const { error } = await sb.auth.updateUser({ password:p1 });
+    btn.disabled = false; btn.textContent = "修改密码";
+    if(error){ msg.textContent = "修改失败：" + error.message; return; }
+    $("pwNew").value = ""; $("pwNew2").value = "";
+    msg.textContent = "密码改好啦，下次登录用新密码";
+    toast("密码已修改 🔑");
   });
   $("anAdd").addEventListener("click", async ()=>{
     const payload={ title:$("anTitle").value.trim(), date:$("anDate").value, repeat:$("anRepeat").value };
