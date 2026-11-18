@@ -366,6 +366,26 @@ nav.pills button{flex:none}
 .sleep-banner img{width:100%;display:block}
 .sleep-banner .sc-cap{text-align:center;padding:11px 10px 13px;font-size:16.5px}
 
+
+/* ================= v5 ================= */
+/* daily card */
+.daily-card{text-align:center;padding:20px 18px}
+.daily-card .dc-k{font-size:13px;color:var(--honey-deep);font-weight:700;letter-spacing:1px}
+.daily-card .dc-img{width:100%;max-height:240px;object-fit:cover;border:2px solid var(--line);border-radius:15px;margin-top:10px;cursor:pointer}
+.daily-card .dc-t{font-size:19px;line-height:1.65;margin-top:10px}
+.daily-card .dc-s{color:var(--ink-soft);font-size:13px;margin-top:6px}
+/* multi-photo form */
+.mp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.mp-item img{width:100%;height:86px;object-fit:cover;border-radius:11px;border:2px solid var(--line);display:block}
+.mp-item input{margin-top:6px;padding:8px 10px;font-size:13.5px}
+/* moment photo picker */
+.pk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:6px}
+.pk-grid img{width:100%;height:64px;object-fit:cover;border-radius:10px;border:2.5px solid transparent;cursor:pointer;display:block}
+.pk-grid img.sel{border-color:var(--honey-deep);box-shadow:0 0 0 2px var(--yellow)}
+.pk-none{font-size:13px;color:var(--ink-soft);margin-bottom:8px}
+.pk-none button{color:var(--honey-deep);font-weight:700;background:none;border:none;cursor:pointer;font-size:13px}
+.node-img{width:100%;max-height:230px;object-fit:cover;border:2px solid var(--line);border-radius:13px;margin-top:9px;cursor:pointer;display:block}
+
 footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 30px}
 </style>
 </head>
@@ -431,6 +451,9 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
           </div>
         </div>
       </div>
+
+      <div class="sec-title hand">🌈 今日小卡</div>
+      <div class="card daily-card" id="dailyCard"></div>
 
       <div class="sec-title hand">🎁 即将到来的纪念日</div>
       <div class="card" id="nextCard">
@@ -544,7 +567,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
     <section id="tab-dates" class="hidden">
       <div class="backbar"><button class="back-btn" data-back>← 返回</button><span class="back-title hand">纪念日</span></div>
       <div class="sec-head"><h2 class="hand">🎂 我们的纪念日</h2><button class="btn small" id="btnAddAnn">＋ 添加纪念日</button></div>
-      <div style="color:var(--ink-soft);font-size:13.5px;margin:-6px 0 14px">百天和周年会自动算好；想加特别的日子，点右上角添加</div>
+      <div style="color:var(--ink-soft);font-size:13.5px;margin:-6px 0 14px">这里只放你们自己定的日子，每条都能改、能删</div>
       <div id="dateList"></div>
       <div class="empty hidden" id="dateEmpty">还没有纪念日<br>先在设置里填上在一起的起始日吧 🎂</div>
     </section>
@@ -1303,6 +1326,260 @@ function renderBoard(){
   }, 250);
   setTimeout(()=>{ const b = $("bootLoad"); if(b) b.style.display = "none"; clearInterval(iv); }, 6000);
 })();
+
+
+
+/* ================= v5 overrides ================= */
+/* sign moment photos after load */
+const _loadAllV5 = loadAll;
+loadAll = async function(){
+  await _loadAllV5();
+  try{
+    const ms = (S.moments||[]).filter(m=>m.photo_path);
+    if(ms.length){
+      const { data } = await sb.storage.from("photos").createSignedUrls(ms.map(m=>m.photo_path), 3600);
+      const map = {}; (data||[]).forEach((d,i)=>{ if(d && !d.error) map[ms[i].photo_path] = d.signedUrl; });
+      S.moments.forEach(m=>{ if(m.photo_path) m.url = map[m.photo_path] || null; });
+    }
+  }catch(e){ /* moments without photos still work */ }
+};
+
+/* ---------- anniversaries: custom-first countdown ---------- */
+function nextAnniversary(){
+  const t = todayStr();
+  if(S.anniversaries && S.anniversaries.length){
+    const cands = [];
+    for(const a of S.anniversaries){
+      const nx = nextOccurrence(a); if(!nx) continue;
+      let progress;
+      if(a.repeat==="yearly"){ const d0 = parseD(nx); const prev = new Date(d0.getFullYear()-1, d0.getMonth(), d0.getDate()); progress = 1 - diffDays(t,nx)/Math.max(1, diffDays(dstr(prev), nx)); }
+      else if(a.repeat==="monthly"){ const d0 = parseD(nx); const prev = new Date(d0.getFullYear(), d0.getMonth()-1, d0.getDate()); progress = 1 - diffDays(t,nx)/Math.max(1, diffDays(dstr(prev), nx)); }
+      else progress = Math.min(1, Math.max(0, 1 - diffDays(t,nx)/365));
+      cands.push({ title:a.title, date:nx, progress });
+    }
+    cands.sort((x,y)=> x.date<y.date ? -1 : 1);
+    if(cands.length) return cands[0];
+  }
+  /* fallback: automatic milestones when no custom anniversaries */
+  const start = S.settings && S.settings.start_date; const cands = [];
+  if(start && start<=t){
+    const n = diffDays(start,t)+1;
+    const m = Math.ceil((n+1)/100)*100;
+    cands.push({ title:"在一起第 "+m+" 天", date:addDays(start,m-1), progress:(n-(m-100))/100 });
+    const sd = parseD(start); let cand = new Date(new Date().getFullYear(), sd.getMonth(), sd.getDate());
+    if(dstr(cand) < t) cand = new Date(cand.getFullYear()+1, sd.getMonth(), sd.getDate());
+    const yrs = cand.getFullYear()-sd.getFullYear();
+    const prev = new Date(cand.getFullYear()-1, sd.getMonth(), sd.getDate());
+    cands.push({ title:"在一起 "+yrs+" 周年", date:dstr(cand), progress: 1 - diffDays(t,dstr(cand))/Math.max(1, diffDays(dstr(prev), dstr(cand))) });
+  }
+  cands.sort((x,y)=> x.date<y.date ? -1 : 1);
+  return cands[0] || null;
+}
+
+/* ---------- anniversaries page: custom only, add/edit/delete here ---------- */
+function annForm(a){
+  openModal(`<h3 class="hand">${a?"编辑纪念日":"添加纪念日"}</h3>
+    <div class="f-row"><label>名称</label><input id="afTitle" value="${a?esc(a.title):""}" placeholder="比如：第一次牵手纪念日"></div>
+    <div class="f-row"><label>日期</label><input id="afDate" type="date" value="${a?a.date:todayStr()}"></div>
+    <div class="f-row"><label>重复</label><select id="afRepeat"><option value="once">只此一次</option><option value="yearly">每年</option><option value="monthly">每月</option></select></div>
+    <div class="f-ops"><button class="btn ghost" onclick="closeModal()">取消</button><button class="btn" id="afSave">保存</button></div>`);
+  if(a) $("afRepeat").value = a.repeat || "once";
+  $("afSave").addEventListener("click", async ()=>{
+    const payload = { title:$("afTitle").value.trim(), date:$("afDate").value, repeat:$("afRepeat").value };
+    if(!payload.title || !payload.date) return toast("名称和日期都要填");
+    const r = a ? await sb.from("anniversaries").update(payload).eq("id", a.id) : await sb.from("anniversaries").insert(payload);
+    if(r.error) return toast("保存失败："+r.error.message);
+    closeModal(); await loadAll(); renderDates(); renderHome(); toast("纪念日记下啦 🎂");
+  });
+}
+$("btnAddAnn").addEventListener("click", ()=>annForm(null));
+function renderDates(){
+  const list = $("dateList"); if(!list) return; list.innerHTML = "";
+  const t = todayStr();
+  const rows = S.anniversaries.map(a=>{
+    const nx = nextOccurrence(a);
+    return { a, nx, past: !nx };
+  }).sort((x,y)=>{
+    if(x.past !== y.past) return x.past ? 1 : -1;
+    const dx = x.nx || x.a.date, dy = y.nx || y.a.date;
+    return dx < dy ? -1 : 1;
+  });
+  $("dateEmpty").classList.toggle("hidden", rows.length>0);
+  if(!rows.length) $("dateEmpty").innerHTML = "还没有自定义纪念日<br>点右上角「添加纪念日」，把你们的日子记下来 🎂";
+  for(const r of rows){
+    const a = r.a; const left = r.nx ? diffDays(t, r.nx) : 0;
+    const div = document.createElement("div"); div.className = "card date-row" + (r.past ? " past" : "");
+    div.innerHTML = `<div class="cd-ico">🎂</div>
+      <div style="min-width:0"><div class="cd-t" style="font-size:17.5px;font-weight:700">${esc(a.title)}<span class="kind-chip">${a.repeat==="yearly"?"每年":a.repeat==="monthly"?"每月":"一次"}</span></div>
+      <div class="cd-s" style="color:var(--ink-soft);font-size:13.5px;margin-top:2px">${fmtCN(a.date)}${r.nx && r.nx!==a.date ? " · 下一次 "+fmtCN(r.nx) : ""}</div>
+      <div class="ops" style="margin-top:7px"><button class="mini-btn" data-e>编辑</button><button class="mini-btn red" data-d>删除</button></div></div>
+      <div class="dr-r"><div class="dr-n">${r.past ? "已过去" : left===0 ? "今天！" : "还有 "+left+" 天"}</div>
+      ${r.past ? "" : `<div class="progress" style="margin-top:5px"><i style="width:${Math.round(Math.min(1,Math.max(0,1-left/365))*100)}%"></i></div>`}</div>`;
+    div.querySelector("[data-e]").addEventListener("click", ()=>annForm(a));
+    div.querySelector("[data-d]").addEventListener("click", async ()=>{
+      if(!confirm("删掉纪念日「"+a.title+"」？")) return;
+      await sb.from("anniversaries").delete().eq("id", a.id);
+      await loadAll(); renderDates(); renderHome(); toast("已删除");
+    });
+    list.appendChild(div);
+  }
+}
+
+/* ---------- album: multi-photo upload ---------- */
+(function(){
+  const old = $("photoFile"); if(!old) return;
+  const nf = old.cloneNode();
+  nf.setAttribute("multiple", "");
+  old.replaceWith(nf);
+  nf.addEventListener("change", ()=>{
+    const files = [...nf.files]; nf.value = "";
+    if(!files.length) return;
+    const items = files.map(f=>({ f, url:URL.createObjectURL(f) }));
+    openModal(`<h3 class="hand">添加照片 · ${items.length} 张</h3>
+      <div class="mp-grid">${items.map((it,i)=>`<div class="mp-item"><img src="${it.url}"><input data-cap="${i}" placeholder="给这张写句配文…"></div>`).join("")}</div>
+      <div class="f-row"><label>拍摄日期（统一）</label><input id="mpDate" type="date" value="${todayStr()}"></div>
+      <div class="f-ops"><button class="btn ghost" onclick="closeModal()">取消</button><button class="btn" id="mpSave">全部存进相册</button></div>`);
+    $("mpSave").addEventListener("click", async ()=>{
+      const btn = $("mpSave"); btn.disabled = true;
+      const taken = $("mpDate").value || null;
+      let ok = 0; const errs = [];
+      for(let i=0;i<items.length;i++){
+        btn.textContent = "上传中 "+(i+1)+"/"+items.length+"…";
+        const capEl = document.querySelector(`[data-cap="${i}"]`);
+        const path = Date.now()+"_"+i+"_"+items[i].f.name.replace(/[^\w.\-]/g,"_");
+        const up = await sb.storage.from("photos").upload(path, items[i].f);
+        if(up.error){ errs.push(items[i].f.name); continue; }
+        const ins = await sb.from("photos").insert({ storage_path:path, caption:capEl?capEl.value.trim():"", taken_on:taken });
+        if(ins.error){ errs.push(items[i].f.name); continue; }
+        ok++;
+      }
+      closeModal(); await loadAll(); renderAlbum(); renderHomePhotos(); renderHome();
+      if(errs.length) toast("存好 "+ok+" 张，"+errs.length+" 张失败了");
+      else toast(ok+" 张照片都收好啦 📷");
+    });
+  });
+})();
+
+/* ---------- moments: attach a photo from the album ---------- */
+function momentForm(m){
+  let picked = m ? (m.photo_path || null) : null;
+  openModal(`<h3 class="hand">${m?"编辑节点":"添加节点"}</h3>
+    <div class="f-row"><label>日期</label><input id="mfDate" type="date" value="${m?m.date:todayStr()}"></div>
+    <div class="f-row"><label>标题</label><input id="mfTitle" value="${m?esc(m.title):""}" placeholder="比如：第一次见面"></div>
+    <div class="f-row"><label>想记下来的话</label><textarea id="mfNote" placeholder="那天发生了什么…">${m?esc(m.note||""):""}</textarea></div>
+    <div class="f-row"><label>配一张照片（可选）</label>
+      ${S.photos.length
+        ? `<div class="pk-grid">${S.photos.map(p=>`<img data-pk="${esc(p.storage_path)}" src="${esc(p.url)}" class="${picked===p.storage_path?"sel":""}">`).join("")}</div>
+           <div class="pk-none">点一张选中，再点一次取消 · <button type="button" id="pkClear">不配图</button></div>`
+        : `<div class="pk-none">相册还没有照片，先去日常记录里传几张吧</div>`}
+    </div>
+    <div class="f-ops"><button class="btn ghost" onclick="closeModal()">取消</button><button class="btn" id="mfSave">保存</button></div>`);
+  document.querySelectorAll("[data-pk]").forEach(img=>{
+    img.addEventListener("click", ()=>{
+      picked = (picked === img.dataset.pk) ? null : img.dataset.pk;
+      document.querySelectorAll("[data-pk]").forEach(x=>x.classList.toggle("sel", x.dataset.pk === picked));
+    });
+  });
+  const clr = $("pkClear"); if(clr) clr.addEventListener("click", ()=>{ picked = null; document.querySelectorAll("[data-pk]").forEach(x=>x.classList.remove("sel")); });
+  $("mfSave").addEventListener("click", async ()=>{
+    const payload = { date:$("mfDate").value, title:$("mfTitle").value.trim(), note:$("mfNote").value.trim(), photo_path:picked };
+    if(!payload.date || !payload.title) return toast("日期和标题都要填");
+    const r = m ? await sb.from("moments").update(payload).eq("id", m.id) : await sb.from("moments").insert(payload);
+    if(r.error) return toast("保存失败："+r.error.message);
+    closeModal(); await loadAll(); renderTimeline(); toast("记下来啦 ✍️");
+  });
+}
+function renderTimeline(){
+  const list = $("momentList"); list.innerHTML = "";
+  const items = [...S.moments].reverse();
+  $("momentEmpty").classList.toggle("hidden", items.length>0);
+  for(const m of items){
+    const div = document.createElement("div"); div.className = "node";
+    const long = (m.note||"").length > 70;
+    div.innerHTML = `<div class="nd">${fmtCN(m.date)}</div><div class="nt hand">${esc(m.title)}</div>
+      ${m.note ? (long
+        ? `<div class="nn"><span data-short>${esc(m.note.slice(0,70))}…</span><span data-full class="hidden">${esc(m.note)}</span><button class="more" data-x>展开</button></div>`
+        : `<div class="nn">${esc(m.note)}</div>`) : ""}
+      ${m.url ? `<img class="node-img" src="${esc(m.url)}" loading="lazy">` : ""}
+      <div class="ops"><button class="mini-btn" data-e>编辑</button><button class="mini-btn red" data-d>删除</button></div>`;
+    const xb = div.querySelector("[data-x]");
+    if(xb) xb.addEventListener("click", ()=>{
+      const full = div.querySelector("[data-full]"), short = div.querySelector("[data-short]");
+      const showingFull = !full.classList.contains("hidden");
+      full.classList.toggle("hidden", showingFull);
+      short.classList.toggle("hidden", !showingFull);
+      xb.textContent = showingFull ? "展开" : "收起";
+    });
+    const im = div.querySelector(".node-img");
+    if(im) im.addEventListener("click", ()=>{
+      openModal(`<img class="view-img" src="${esc(m.url)}">
+        <div style="margin-top:12px;font-size:17px" class="hand">${esc(m.title)}</div>
+        <div style="color:var(--ink-soft);font-size:13px;margin-top:3px">${fmtCN(m.date)}</div>
+        <div class="f-ops"><button class="btn" onclick="closeModal()">返回</button></div>`);
+    });
+    div.querySelector("[data-e]").addEventListener("click", ()=>momentForm(m));
+    div.querySelector("[data-d]").addEventListener("click", async ()=>{
+      if(!confirm("删掉回忆「"+m.title+"」？")) return;
+      await sb.from("moments").delete().eq("id", m.id); await loadAll(); renderTimeline(); toast("已删除");
+    });
+    list.appendChild(div);
+  }
+}
+
+/* ---------- daily card ---------- */
+const LOVE_LINES = [
+  "山高路远，我们慢慢走，反正终点是你。",
+  "今天也辛苦啦，记得你身后一直有个人。",
+  "想把所有好天气，都留给和你见面的那天。",
+  "你是我平淡日子里，最想炫耀的那部分。",
+  "今天的月亮和昨天一样圆，我想你也和昨天一样多，还多一点。",
+  "把今天过好，就是给我们的以后存钱。",
+  "你笑一次，我就觉得这一天没白过。",
+  "不求轰轰烈烈，只求天长地久地有你。",
+  "世界上最安稳的事，就是知道你在那边，也在想我。",
+  "忙的时候各自努力，闲的时候第一时间找你。",
+  "你是我所有计划里，唯一不想改的那一条。",
+  "风会替我抱抱你，雨会替我亲亲你，我会亲自来见你。",
+  "日子再普通，有你就不算浪费。",
+  "异地不苦，苦的是想抱抱的时候只能抱手机——所以更要好好攒见面。"
+];
+const DAILY_TASKS = [
+  "给她发一句语音，说今天最想她的一件事",
+  "翻出一张你们的老照片，发给她，说说当时发生了什么",
+  "把下一次见面想做的 3 件小事，写进心愿清单",
+  "给她写一封时光信，锁到下个纪念日再拆",
+  "学一句她家乡的方言，录下来发给她",
+  "在留言板写一句只有你们两个懂的话",
+  "约她云看同一部电影，边看边聊",
+  "给她唱半首歌，跑调也没关系",
+  "把一张合照设成手机壁纸，截图给她看",
+  "认真夸她一个具体的优点，不许只说好看",
+  "今天早点睡，把好状态留给明天",
+  "给她点一杯爱喝的奶茶；点不了就记下来，见面补上"
+];
+function renderDailyCard(){
+  const el = $("dailyCard"); if(!el) return;
+  const t = todayStr(); let seed = 0;
+  for(const c of t) seed = (seed*31 + c.charCodeAt(0)) >>> 0;
+  const kind = seed % 3;
+  if(kind===0 && S.photos && S.photos.length){
+    const p = S.photos[seed % S.photos.length];
+    el.innerHTML = `<div class="dc-k">📸 今日小卡 · 回忆杀</div>
+      <img class="dc-img" src="${esc(p.url)}">
+      <div class="dc-t hand">${esc(p.caption||"我们的照片")}</div>
+      <div class="dc-s">${p.taken_on?fmtCN(p.taken_on)+" · ":""}还记得这一天吗？</div>`;
+    el.querySelector(".dc-img").addEventListener("click", ()=>viewPhoto(p));
+  } else if(kind===2){
+    el.innerHTML = `<div class="dc-k">🎲 今日小卡 · 小任务</div>
+      <div class="dc-t hand">${esc(DAILY_TASKS[seed % DAILY_TASKS.length])}</div>
+      <div class="dc-s">做到了，记得去留言板打个卡</div>`;
+  } else {
+    el.innerHTML = `<div class="dc-k">💌 今日小卡 · 一句话</div>
+      <div class="dc-t hand">${esc(LOVE_LINES[seed % LOVE_LINES.length])}</div>
+      <div class="dc-s">${fmtCN(t)} · 每天一张，零点刷新</div>`;
+  }
+}
+function renderAll(){ renderHome(); renderAlbum(); renderTimeline(); renderLetters(); renderWishes(); renderBoard(); renderDates(); renderHomeWishes(); renderHomePhotos(); renderDailyCard(); }
 
 
 /* ---------- boot ---------- */
