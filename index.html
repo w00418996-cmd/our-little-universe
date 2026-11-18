@@ -181,6 +181,77 @@ main{max-width:880px;margin:0 auto;padding:18px 14px 70px}
   box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .25s;
 }
 .toast.show{opacity:1}
+/* ---------- v2: nav scroll ---------- */
+nav.pills{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+nav.pills::-webkit-scrollbar{display:none}
+nav.pills button{flex:none}
+.logo{flex:none}
+
+/* ---------- v2: home ---------- */
+.hero2{display:flex;align-items:center;gap:6px}
+.avatar-badge{flex:none;text-align:center;width:104px}
+.avatar-badge .circ{width:92px;height:92px;margin:0 auto;border-radius:50%;border:2.5px solid var(--line);background:radial-gradient(circle at 50% 38%,#FFF3D6,#FBE3B9);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 0 rgba(107,74,47,.85);overflow:hidden}
+.avatar-badge .who{margin-top:6px;font-size:16.5px}
+.hero-mid{flex:1;text-align:center;min-width:0}
+.hero-mid .lab{font-size:17px;letter-spacing:3px;color:var(--ink-soft)}
+.hero-mid .bignum{font-family:"Ma Shan Zheng",cursive;font-size:74px;line-height:1.1;color:var(--honey-deep);text-shadow:3px 3px 0 rgba(238,143,58,.22)}
+.hero-mid .bignum small{font-size:30px;color:var(--ink)}
+.hero-mid .from{color:var(--ink-soft);font-size:13.5px;margin-top:5px}
+@media(max-width:560px){.avatar-badge{width:76px}.avatar-badge .circ{width:68px;height:68px}.hero-mid .bignum{font-size:50px}.hero-mid .bignum small{font-size:21px}.hero-mid .lab{font-size:14.5px}}
+.sec-title{font-size:19px;margin:20px 0 11px}
+.cd-card{display:flex;align-items:center;gap:14px}
+.cd-ico{width:56px;height:56px;flex:none;border-radius:50%;background:var(--honey);border:2.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:27px;box-shadow:0 3px 0 rgba(107,74,47,.85)}
+.cd-card .cd-t{font-size:18px;font-weight:700}
+.cd-card .cd-s{color:var(--ink-soft);font-size:13.5px;margin-top:2px}
+.cd-right{margin-left:auto;text-align:right;flex:none;width:124px}
+.cd-right .cd-lab{font-size:11.5px;color:var(--ink-soft);margin-bottom:5px}
+.quick2{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+@media(max-width:560px){.quick2{grid-template-columns:repeat(2,1fr)}}
+.q2{border:2px solid var(--line);background:var(--card);border-radius:19px;padding:15px 6px 12px;box-shadow:0 3px 0 rgba(107,74,47,.9);text-align:center;color:var(--ink);font-family:inherit;cursor:pointer}
+.q2:active{transform:translateY(3px);box-shadow:none}
+.q2 .qc{width:64px;height:64px;margin:0 auto 8px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:29px}
+.q2 .qt{font-weight:700;font-size:15.5px}
+.q2 .qs{color:var(--ink-soft);font-size:12px;margin-top:2px}
+.scene{border:2px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:18px;background:#fff}
+.scene svg{display:block;width:100%;height:auto}
+.scene .sc-cap{text-align:center;padding:11px 10px 13px;font-size:16.5px}
+.story-card{display:flex;gap:16px;align-items:center}
+.story-card .st-img{flex:1.25;border:2px solid var(--line);border-radius:15px;overflow:hidden;min-width:0}
+.story-card .st-img svg{display:block;width:100%;height:auto}
+.story-card .st-tx{flex:1;text-align:center;min-width:0}
+.story-card .st-t{font-size:24px;line-height:1.5}
+.story-card .st-s{color:var(--ink-soft);font-size:13.5px;line-height:1.9;margin:8px 0 14px}
+@media(max-width:560px){.story-card{flex-direction:column}.story-card .st-img{width:100%}}
+
+/* ---------- v2: wishes ---------- */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:14px}
+.stat{border:2px solid var(--line);border-radius:17px;padding:13px 6px;text-align:center;box-shadow:0 3px 0 rgba(107,74,47,.85)}
+.stat .n{font-family:"Ma Shan Zheng",cursive;font-size:27px}
+.stat .l{font-size:12.5px;color:var(--ink-soft);margin-top:1px}
+.stat.y{background:#FFF6C9}.stat.p{background:#FDE7F0}.stat.g{background:#E4F2E4}
+.filters{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.filters button{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:5px 16px;font-size:13.5px;font-weight:700;box-shadow:0 2px 0 rgba(107,74,47,.85);color:var(--ink)}
+.filters button.active{background:#F5C542}
+.wish{position:relative}
+.wish .tag{display:inline-block;font-size:11.5px;font-weight:700;border:1.8px solid var(--line);border-radius:999px;padding:2px 10px;margin-bottom:7px}
+.wish .wt{font-size:18.5px;padding-right:44px}
+.wish .wn{color:var(--ink-soft);font-size:14px;line-height:1.65;margin-top:3px}
+.wish .check{position:absolute;right:16px;bottom:16px;width:38px;height:38px;border-radius:50%;border:2.5px dashed rgba(107,74,47,.55);background:#fff;font-size:18px;color:transparent;display:flex;align-items:center;justify-content:center;padding:0}
+.wish.done{opacity:.78}
+.wish.done .check{border-style:solid;border-color:var(--green);background:#E4F2E4;color:var(--green)}
+.wish .wd{font-size:12.5px;color:var(--green);font-weight:700;margin-top:6px}
+.wish .ops{margin-top:8px;display:flex;gap:7px}
+
+/* ---------- v2: board ---------- */
+.msg{display:flex;gap:11px;margin-bottom:13px}
+.msg .av{width:42px;height:42px;flex:none;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700}
+.msg .mb{flex:1;background:#fff;border:2px solid var(--line);border-radius:4px 16px 16px 16px;padding:10px 13px;box-shadow:0 2px 0 rgba(107,74,47,.7);min-width:0}
+.msg .mh{font-size:12.5px;color:var(--ink-soft);margin-bottom:3px}
+.msg .mt{font-size:15px;line-height:1.65;white-space:pre-wrap;word-break:break-word}
+.msg .mdel{float:right}
+.compose{display:flex;gap:9px;align-items:flex-end}
+.compose textarea{flex:1;border:2px solid var(--line);border-radius:15px;padding:10px 12px;background:#fff;min-height:52px;resize:vertical;font-size:15px}
+
 footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 30px}
 </style>
 </head>
@@ -209,6 +280,8 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
       <button data-tab="album">相册</button>
       <button data-tab="timeline">回忆</button>
       <button data-tab="letters">时光信</button>
+      <button data-tab="wishes">心愿</button>
+      <button data-tab="board">留言</button>
     </nav>
     <button class="icon-btn" id="btnSettings" title="设置">⚙️</button>
     <button class="icon-btn" id="btnLogout" title="退出登录">🚪</button>
@@ -216,50 +289,63 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
 
   <main>
     <!-- HOME -->
+    <!-- HOME -->
     <section id="tab-home">
       <div class="card">
-        <div class="hero-names">
-          <div class="pup">
-            <svg width="96" height="86" viewBox="0 0 96 86"><ellipse cx="22" cy="26" rx="11" ry="17" fill="#B97F45" stroke="#6B4A2F" stroke-width="2.5" transform="rotate(-18 22 26)"/><ellipse cx="74" cy="26" rx="11" ry="17" fill="#B97F45" stroke="#6B4A2F" stroke-width="2.5" transform="rotate(18 74 26)"/><circle cx="48" cy="46" r="31" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><rect x="24" y="34" width="20" height="12" rx="6" fill="#333"/><rect x="52" y="34" width="20" height="12" rx="6" fill="#333"/><rect x="43" y="38" width="10" height="4" fill="#333"/><ellipse cx="48" cy="56" rx="6" ry="4.5" fill="#8A5A33"/><path d="M42 63 Q48 68 54 63" stroke="#6B4A2F" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="29" cy="55" r="5" fill="#F6A8B8" opacity=".65"/><circle cx="67" cy="55" r="5" fill="#F6A8B8" opacity=".65"/></svg>
-            <div class="who hand"><span id="nameA1">他</span><small>戴墨镜的小棕</small></div>
+        <div class="hero2">
+          <div class="avatar-badge">
+            <div class="circ"><svg width="74" height="66" viewBox="0 0 96 86"><ellipse cx="22" cy="26" rx="11" ry="17" fill="#B97F45" stroke="#6B4A2F" stroke-width="2.5" transform="rotate(-18 22 26)"/><ellipse cx="74" cy="26" rx="11" ry="17" fill="#B97F45" stroke="#6B4A2F" stroke-width="2.5" transform="rotate(18 74 26)"/><circle cx="48" cy="46" r="31" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><rect x="24" y="34" width="20" height="12" rx="6" fill="#333"/><rect x="52" y="34" width="20" height="12" rx="6" fill="#333"/><rect x="43" y="38" width="10" height="4" fill="#333"/><ellipse cx="48" cy="56" rx="6" ry="4.5" fill="#8A5A33"/><path d="M42 63 Q48 68 54 63" stroke="#6B4A2F" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="29" cy="55" r="5" fill="#F6A8B8" opacity=".65"/><circle cx="67" cy="55" r="5" fill="#F6A8B8" opacity=".65"/></svg></div>
+            <div class="who hand" id="nameA1">他</div>
           </div>
-          <svg class="ecg" height="34" viewBox="0 0 300 34" preserveAspectRatio="none"><polyline points="0,17 70,17 88,17 96,6 106,28 114,17 140,17" fill="none" stroke="#E4572E" stroke-width="2.5" stroke-linecap="round"/><text x="152" y="24" font-size="17" fill="#E4572E">❤</text><polyline points="172,17 205,17 213,6 223,28 231,17 300,17" fill="none" stroke="#E4572E" stroke-width="2.5" stroke-linecap="round"/></svg>
-          <div class="pup">
-            <svg width="96" height="86" viewBox="0 0 96 86"><ellipse cx="22" cy="26" rx="11" ry="17" fill="#EDE4D3" stroke="#6B4A2F" stroke-width="2.5" transform="rotate(-18 22 26)"/><ellipse cx="74" cy="26" rx="11" ry="17" fill="#EDE4D3" stroke="#6B4A2F" stroke-width="2.5" transform="rotate(18 74 26)"/><circle cx="48" cy="44" r="31" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="38" cy="42" r="3.2" fill="#5B4636"/><circle cx="58" cy="42" r="3.2" fill="#5B4636"/><ellipse cx="48" cy="52" rx="5" ry="4" fill="#C98A5A"/><path d="M43 59 Q48 63 53 59" stroke="#6B4A2F" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="29" cy="52" r="5" fill="#F6A8B8" opacity=".8"/><circle cx="67" cy="52" r="5" fill="#F6A8B8" opacity=".8"/><g><rect x="60" y="58" width="17" height="21" rx="3" fill="#F6C177" stroke="#6B4A2F" stroke-width="2"/><rect x="60" y="64" width="17" height="15" rx="3" fill="#B08968"/><circle cx="65" cy="74" r="1.8" fill="#333"/><circle cx="71" cy="71" r="1.8" fill="#333"/><circle cx="68" cy="77" r="1.8" fill="#333"/><rect x="67" y="50" width="3.5" height="10" rx="1.5" fill="#E4572E" transform="rotate(12 68 55)"/></g></svg>
-            <div class="who hand"><span id="nameB1">她</span><small>抱奶茶的小白</small></div>
+          <div class="hero-mid">
+            <div class="lab hand">我们已相爱</div>
+            <div class="bignum"><span id="daysNum">–</span><small> 天</small></div>
+            <svg width="170" height="22" viewBox="0 0 300 26" preserveAspectRatio="none" style="max-width:80%"><polyline points="0,13 96,13 106,4 116,22 124,13 300,13" fill="none" stroke="#F2A0B5" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <div style="color:#E4572E;font-size:16px;line-height:1">❤</div>
+            <div class="from" id="daysFrom">从设置里填上在一起的那一天开始</div>
           </div>
-        </div>
-        <div class="big-days">
-          <div class="label hand">我们已相爱</div>
-          <div class="num" id="daysNum">–</div>
-          <div class="from" id="daysFrom">从设置里填上在一起的那一天开始</div>
+          <div class="avatar-badge">
+            <div class="circ"><svg width="74" height="66" viewBox="0 0 96 86"><ellipse cx="22" cy="26" rx="11" ry="17" fill="#EDE4D3" stroke="#6B4A2F" stroke-width="2.5" transform="rotate(-18 22 26)"/><ellipse cx="74" cy="26" rx="11" ry="17" fill="#EDE4D3" stroke="#6B4A2F" stroke-width="2.5" transform="rotate(18 74 26)"/><circle cx="48" cy="44" r="31" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="38" cy="42" r="3.2" fill="#5B4636"/><circle cx="58" cy="42" r="3.2" fill="#5B4636"/><ellipse cx="48" cy="52" rx="5" ry="4" fill="#C98A5A"/><path d="M43 59 Q48 63 53 59" stroke="#6B4A2F" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="29" cy="52" r="5" fill="#F6A8B8" opacity=".8"/><circle cx="67" cy="52" r="5" fill="#F6A8B8" opacity=".8"/><g><rect x="60" y="58" width="17" height="21" rx="3" fill="#F6C177" stroke="#6B4A2F" stroke-width="2"/><rect x="60" y="64" width="17" height="15" rx="3" fill="#B08968"/><circle cx="65" cy="74" r="1.8" fill="#333"/><circle cx="71" cy="71" r="1.8" fill="#333"/><circle cx="68" cy="77" r="1.8" fill="#333"/><rect x="67" y="50" width="3.5" height="10" rx="1.5" fill="#E4572E" transform="rotate(12 68 55)"/></g></svg></div>
+            <div class="who hand" id="nameB1">她</div>
+          </div>
         </div>
       </div>
 
+      <div class="sec-title hand">🎁 即将到来的纪念日</div>
       <div class="card" id="nextCard">
-        <div class="count-card">
-          <div class="ring">⏳</div>
-          <div style="flex:1">
-            <div class="t1" id="nextTitle">即将到来的纪念日</div>
-            <div class="t2" id="nextSub">填好起始日后，这里会自动倒计时</div>
-            <div class="progress"><i id="nextBar" style="width:0%"></i></div>
+        <div class="cd-card">
+          <div class="cd-ico">🎁</div>
+          <div style="min-width:0">
+            <div class="cd-t" id="nextTitle">即将到来的纪念日</div>
+            <div class="cd-s" id="nextSub">填好起始日后，这里会自动倒计时</div>
           </div>
-          <div style="text-align:center;flex:none">
-            <div class="hand" id="nextDays" style="font-size:34px;color:var(--honey-deep)">–</div>
-            <div style="font-size:12px;color:var(--ink-soft)">天后</div>
+          <div class="cd-right">
+            <div class="cd-lab">倒计时进度 · 还有 <span id="nextDays">–</span> 天</div>
+            <div class="progress" style="margin-top:0"><i id="nextBar" style="width:0%"></i></div>
           </div>
         </div>
       </div>
 
-      <div class="quick" style="margin-bottom:18px">
-        <button data-go="album"><span class="qi">📷</span>时光相册</button>
-        <button data-go="timeline"><span class="qi">🗓️</span>回忆线</button>
-        <button data-go="letters"><span class="qi">✉️</span>时光信</button>
-        <button id="quickSettings"><span class="qi">🎂</span>纪念日</button>
+      <div class="card story-card">
+        <div class="st-img"><svg viewBox="0 0 520 300"><rect width="520" height="300" fill="#CDEBC0"/><rect y="205" width="520" height="95" fill="#A8D89A"/><ellipse cx="415" cy="90" rx="105" ry="52" fill="#8ED0E8"/><ellipse cx="415" cy="90" rx="105" ry="52" fill="none" stroke="#6B4A2F" stroke-width="2.5"/><path d="M330 78 Q415 60 500 78" stroke="#fff" stroke-width="4" fill="none" opacity=".7"/><rect x="52" y="105" width="15" height="80" fill="#8A5A33"/><circle cx="60" cy="82" r="44" fill="#6FBF73" stroke="#6B4A2F" stroke-width="2.5"/><rect x="128" y="125" width="12" height="60" fill="#8A5A33"/><circle cx="134" cy="105" r="32" fill="#8FD694" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="452" cy="34" r="19" fill="#FFD93D" stroke="#6B4A2F" stroke-width="2.5"/><g transform="rotate(-4 260 225)"><rect x="165" y="188" width="190" height="78" rx="8" fill="#F6A8B8" stroke="#6B4A2F" stroke-width="2.5"/><rect x="178" y="200" width="164" height="54" rx="6" fill="#FFF6EC"/></g><ellipse cx="228" cy="222" rx="33" ry="15" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="258" cy="212" r="14" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><ellipse cx="252" cy="200" rx="5" ry="9" fill="#B97F45" stroke="#6B4A2F" stroke-width="2"/><ellipse cx="305" cy="224" rx="33" ry="15" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="278" cy="214" r="14" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><ellipse cx="270" cy="203" rx="5" ry="9" fill="#EDE4D3" stroke="#6B4A2F" stroke-width="2"/><rect x="330" y="196" width="24" height="19" rx="3" fill="#F6C177" stroke="#6B4A2F" stroke-width="2"/><path d="M336 196 L342 184 L348 196" stroke="#6B4A2F" stroke-width="2" fill="none"/><circle cx="196" cy="238" r="5" fill="#E4572E"/><circle cx="318" cy="242" r="5" fill="#F5C542"/></svg></div>
+        <div class="st-tx">
+          <div class="st-t hand">继续创造<br>属于我们的故事</div>
+          <div class="st-s">每一天都是新的开始<br>每一刻都值得被记录</div>
+          <button class="btn" data-go="timeline">🕐 去记录</button>
+        </div>
       </div>
 
-      <div class="banner b1"><div class="bt hand">和你一起看过的风景，都是最美的画面</div><div class="bs">把日子过成故事，一页一页慢慢写</div></div>
-      <div class="banner b2"><div class="bt hand">只要有你在身边，每一天都是好天气</div><div class="bs">继续创造 · 属于我们的故事</div></div>
+      <div class="sec-title hand">⭐ 快速入口</div>
+      <div class="quick2" style="margin-bottom:18px">
+        <button class="q2" data-go="album"><span class="qc" style="background:#FDEBD2">📷</span><div class="qt hand">日常记录</div><div class="qs">记录美好瞬间</div></button>
+        <button class="q2" id="quickSettings"><span class="qc" style="background:#FDE7F0">🎂</span><div class="qt hand">纪念日</div><div class="qs">重要的日子</div></button>
+        <button class="q2" data-go="wishes"><span class="qc" style="background:#E9F5EC">🌠</span><div class="qt hand">心愿清单</div><div class="qs">未来的计划</div></button>
+        <button class="q2" data-go="timeline"><span class="qc" style="background:#E7EEF9">🌙</span><div class="qt hand">回忆库</div><div class="qs">珍藏的时光</div></button>
+      </div>
+
+      <div class="scene"><svg viewBox="0 0 640 300"><rect width="640" height="300" fill="#AEE2F5"/><circle cx="556" cy="46" r="24" fill="#FFD93D" stroke="#6B4A2F" stroke-width="2.5"/><g fill="#fff" stroke="#6B4A2F" stroke-width="2"><ellipse cx="110" cy="52" rx="42" ry="17"/><ellipse cx="142" cy="44" rx="30" ry="14"/><ellipse cx="430" cy="36" rx="34" ry="13"/></g><path d="M0 128 Q160 84 330 118 T640 104 V300 H0 Z" fill="#8FCB9B"/><path d="M0 168 Q200 132 420 158 T640 148 V300 H0 Z" fill="#F2D38A"/><g stroke="#D9A441" stroke-width="3" stroke-linecap="round"><path d="M40 210 v34 M86 224 v34 M560 206 v34 M606 218 v34 M150 200 v30 M500 232 v30"/></g><path d="M268 300 L306 176 L336 176 L392 300 Z" fill="#EBD9AE" stroke="#C9AE72" stroke-width="2"/><path d="M0 272 H640 V300 H0 Z" fill="#7FC8E8"/><path d="M30 284 h44 M180 291 h52 M470 285 h58" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/><ellipse cx="298" cy="238" rx="27" ry="14" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="322" cy="228" r="13" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><ellipse cx="317" cy="216" rx="5" ry="9" fill="#B97F45" stroke="#6B4A2F" stroke-width="2"/><path d="M274 232 Q262 224 266 214" stroke="#6B4A2F" stroke-width="2.5" fill="none"/><ellipse cx="352" cy="252" rx="24" ry="12" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="332" cy="243" r="12" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><ellipse cx="326" cy="232" rx="4.5" ry="8" fill="#EDE4D3" stroke="#6B4A2F" stroke-width="2"/></svg><div class="sc-cap hand">“和你一起看过的风景，都是最美的画面”</div></div>
+
+      <div class="scene"><svg viewBox="0 0 640 300"><rect width="640" height="300" fill="#FDEFF3"/><g fill="#fff" stroke="#6B4A2F" stroke-width="2"><ellipse cx="120" cy="44" rx="40" ry="15"/><ellipse cx="480" cy="30" rx="32" ry="12"/></g><path d="M0 196 L640 156 V300 H0 Z" fill="#9AA3AD"/><path d="M0 236 L640 198" stroke="#fff" stroke-width="5" stroke-dasharray="34 26"/><rect x="52" y="86" width="13" height="86" fill="#8A5A33"/><g fill="#F6A8B8" stroke="#6B4A2F" stroke-width="2"><circle cx="58" cy="66" r="27"/><circle cx="36" cy="82" r="19"/><circle cx="82" cy="84" r="20"/></g><rect x="548" y="70" width="13" height="86" fill="#8A5A33"/><g fill="#F6A8B8" stroke="#6B4A2F" stroke-width="2"><circle cx="554" cy="50" r="27"/><circle cx="532" cy="66" r="19"/><circle cx="578" cy="68" r="20"/></g><g fill="#F8C3D0"><ellipse cx="150" cy="120" rx="8" ry="5" transform="rotate(-24 150 120)"/><ellipse cx="262" cy="88" rx="8" ry="5" transform="rotate(18 262 88)"/><ellipse cx="420" cy="128" rx="8" ry="5" transform="rotate(-14 420 128)"/><ellipse cx="520" cy="104" rx="8" ry="5" transform="rotate(26 520 104)"/></g><circle cx="252" cy="238" r="21" fill="#444" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="252" cy="238" r="8" fill="#D9D9D9"/><circle cx="398" cy="230" r="21" fill="#444" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="398" cy="230" r="8" fill="#D9D9D9"/><path d="M252 238 L292 178 Q300 162 322 164 L352 166 Q378 168 384 190 L398 230" fill="#57B8B2" stroke="#6B4A2F" stroke-width="2.5"/><path d="M292 178 L336 176 L330 196 L286 196 Z" fill="#3E8E89" stroke="#6B4A2F" stroke-width="2.5"/><path d="M322 164 L312 138 M312 138 L336 134" stroke="#6B4A2F" stroke-width="5" fill="none" stroke-linecap="round"/><ellipse cx="330" cy="140" rx="24" ry="16" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="352" cy="128" r="14" fill="#D9A066" stroke="#6B4A2F" stroke-width="2.5"/><ellipse cx="346" cy="116" rx="5" ry="9" fill="#B97F45" stroke="#6B4A2F" stroke-width="2"/><rect x="334" y="120" width="15" height="8" rx="4" fill="#333"/><ellipse cx="392" cy="152" rx="23" ry="15" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><circle cx="372" cy="140" r="13" fill="#FFFDF6" stroke="#6B4A2F" stroke-width="2.5"/><ellipse cx="365" cy="129" rx="4.5" ry="8" fill="#EDE4D3" stroke="#6B4A2F" stroke-width="2"/><path d="M404 146 Q428 118 424 92" stroke="#6B4A2F" stroke-width="2" fill="none"/><circle cx="424" cy="82" r="13" fill="#F5C542" stroke="#6B4A2F" stroke-width="2.5"/><path d="M415 76 a13 13 0 0 1 18 0" stroke="#E4572E" stroke-width="3" fill="none"/></svg><div class="sc-cap hand">“只要有你在身边，每一天都是好天气”</div></div>
     </section>
 
     <!-- ALBUM -->
@@ -283,6 +369,40 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
       <div id="letterList"></div>
       <div class="empty hidden" id="letterEmpty">还没有时光信<br>写一封锁起来，到日子再一起拆 💌</div>
     </section>
+
+    <!-- WISHES -->
+    <section id="tab-wishes" class="hidden">
+      <div class="sec-head"><h2 class="hand">⭐ 心愿清单</h2><button class="btn small" id="btnAddWish" style="background:#F5C542;color:var(--ink)">＋ 添加心愿</button></div>
+      <div style="color:var(--ink-soft);font-size:13.5px;margin:-6px 0 14px">好多心愿想一起实现</div>
+      <div class="stats">
+        <div class="stat y"><div class="n" id="wishAll">0</div><div class="l">全部心愿</div></div>
+        <div class="stat p"><div class="n" id="wishTodo">0</div><div class="l">待实现</div></div>
+        <div class="stat g"><div class="n" id="wishDone">0</div><div class="l">已完成</div></div>
+      </div>
+      <div class="filters" id="wishFilters">
+        <button data-f="all" class="active">全部</button>
+        <button data-f="todo">待实现</button>
+        <button data-f="done">已实现</button>
+      </div>
+      <div id="wishList"></div>
+      <div class="empty hidden" id="wishEmpty">还没有心愿<br>把想一起做的第一件事写下来吧 🌠</div>
+      <div class="banner" style="background:linear-gradient(120deg,#F6D365,#F6A8B8)"><div class="bt hand" style="color:var(--ink)">一起实现每一个小小的梦想</div><div class="bs" style="color:var(--ink-soft)">每一个心愿都是我们共同的期待，让我们一起努力，让梦想成真 🌈</div></div>
+    </section>
+
+    <!-- BOARD -->
+    <section id="tab-board" class="hidden">
+      <div class="sec-head"><h2 class="hand">💬 留言板</h2></div>
+      <div style="color:var(--ink-soft);font-size:13.5px;margin:-6px 0 14px">想说的话留在这里，对方打开网站就能看到</div>
+      <div class="card">
+        <div class="compose">
+          <textarea id="msgInput" placeholder="写一句给 TA 的话…"></textarea>
+          <button class="btn" id="btnSendMsg">发送</button>
+        </div>
+        <div style="font-size:12.5px;color:var(--ink-soft);margin-top:8px">将以「<span id="meName">我</span>」的名义发布</div>
+      </div>
+      <div id="msgList"></div>
+      <div class="empty hidden" id="msgEmpty">留言板还空着<br>来写第一句吧 💬</div>
+    </section>
   </main>
   <footer><span id="footNames">我们的小宇宙</span> · 每一天都是礼物</footer>
 </div>
@@ -296,7 +416,7 @@ const SUPABASE_URL = "https://xmdemwagzfziozbpgagh.supabase.co";
 const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhtZGVtd2FnemZ6aW96YnBnYWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ5NTY2NDAsImV4cCI6MjExMDUzMjY0MH0.U6C1h05Tgo6nyFPrMHorSUtjv5ijj9fS0ZsquVHcwTg";
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 const $ = id => document.getElementById(id);
-const S = { settings:null, moments:[], anniversaries:[], letters:[], photos:[] };
+const S = { settings:null, moments:[], anniversaries:[], letters:[], photos:[], wishes:[], messages:[], me:"" };
 
 /* ---------- date helpers (local timezone) ---------- */
 function dstr(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
@@ -338,15 +458,21 @@ $("btnLogout").addEventListener("click", async ()=>{ await sb.auth.signOut(); lo
 
 /* ---------- data ---------- */
 async function loadAll(){
-  const [a,b,c,d,e] = await Promise.all([
+  const [a,b,c,d,e,f,g] = await Promise.all([
     sb.from("settings").select("*").eq("id",1).single(),
     sb.from("moments").select("*").order("date",{ascending:true}),
     sb.from("anniversaries").select("*").order("date",{ascending:true}),
     sb.from("letters").select("*").order("created_at",{ascending:false}),
-    sb.from("photos").select("*").order("taken_on",{ascending:true, nullsFirst:false})
+    sb.from("photos").select("*").order("taken_on",{ascending:true, nullsFirst:false}),
+    sb.from("wishes").select("*").order("created_at",{ascending:true}),
+    sb.from("messages").select("*").order("created_at",{ascending:false})
   ]);
   S.settings = a.data || { id:1 };
   S.moments = b.data||[]; S.anniversaries = c.data||[]; S.letters = d.data||[]; S.photos = e.data||[];
+  S.wishes = f.data||[]; S.messages = g.data||[];
+  const { data:ud } = await sb.auth.getUser();
+  const em = ud && ud.user ? (ud.user.email||"") : "";
+  S.me = em==="w00418996@gmail.com" ? (S.settings.name_a||"程锦") : (S.settings.name_b||"薏冰");
   for(const p of S.photos){
     const { data } = await sb.storage.from("photos").createSignedUrl(p.storage_path, 3600);
     p.url = data ? data.signedUrl : "";
@@ -356,12 +482,12 @@ async function enterApp(){
   $("authView").classList.add("hidden"); $("appView").classList.remove("hidden");
   await loadAll(); renderAll();
 }
-function renderAll(){ renderHome(); renderAlbum(); renderTimeline(); renderLetters(); }
+function renderAll(){ renderHome(); renderAlbum(); renderTimeline(); renderLetters(); renderWishes(); renderBoard(); }
 
 /* ---------- tabs ---------- */
 function goTab(name){
   document.querySelectorAll("nav.pills button").forEach(b=>b.classList.toggle("active", b.dataset.tab===name));
-  ["home","album","timeline","letters"].forEach(t=>$("tab-"+t).classList.toggle("hidden", t!==name));
+  ["home","album","timeline","letters","wishes","board"].forEach(t=>$("tab-"+t).classList.toggle("hidden", t!==name));
   window.scrollTo({top:0});
 }
 document.querySelectorAll("nav.pills button").forEach(b=>b.addEventListener("click", ()=>goTab(b.dataset.tab)));
@@ -566,6 +692,81 @@ function viewLetter(l){
     await sb.from("letters").delete().eq("id",l.id); closeModal(); await loadAll(); renderLetters(); toast("已删除");
   });
 }
+
+/* ---------- wishes ---------- */
+let wishFilter = "all";
+const TAG_COLORS = { "旅行":"#D6EAF8", "美食":"#FDEBD2", "娱乐":"#FDE7F0", "生活":"#E4F2E4", "学习":"#E9E4F5", "其他":"#F1E8DA" };
+function renderWishes(){
+  const all = S.wishes.length, done = S.wishes.filter(w=>w.done).length;
+  $("wishAll").textContent = all; $("wishDone").textContent = done; $("wishTodo").textContent = all - done;
+  document.querySelectorAll("#wishFilters button").forEach(b=>b.classList.toggle("active", b.dataset.f===wishFilter));
+  const list = $("wishList"); list.innerHTML = "";
+  const items = S.wishes.filter(w=> wishFilter==="all" ? true : wishFilter==="done" ? w.done : !w.done);
+  $("wishEmpty").classList.toggle("hidden", items.length>0);
+  for(const w of items){
+    const div = document.createElement("div"); div.className = "card wish" + (w.done ? " done" : "");
+    div.innerHTML = `${w.tag?`<span class="tag" style="background:${TAG_COLORS[w.tag]||"#F1E8DA"}">${esc(w.tag)}</span>`:""}
+      <div class="wt hand">${esc(w.title)}</div>
+      ${w.note?`<div class="wn">${esc(w.note)}</div>`:""}
+      ${w.done && w.done_on ? `<div class="wd">✓ 已实现 · ${fmtCN(w.done_on)}</div>` : ""}
+      <div class="ops"><button class="mini-btn" data-e>编辑</button><button class="mini-btn red" data-d>删除</button></div>
+      <button class="check" title="${w.done?"取消完成":"标记实现"}">✓</button>`;
+    div.querySelector("[data-e]").addEventListener("click", ()=>wishForm(w));
+    div.querySelector("[data-d]").addEventListener("click", async ()=>{
+      if(!confirm("删掉这个心愿？")) return;
+      await sb.from("wishes").delete().eq("id", w.id); await loadAll(); renderWishes(); toast("已删除");
+    });
+    div.querySelector(".check").addEventListener("click", async ()=>{
+      const payload = w.done ? { done:false, done_on:null } : { done:true, done_on:todayStr() };
+      const { error } = await sb.from("wishes").update(payload).eq("id", w.id);
+      if(error) return toast("操作失败：" + error.message);
+      await loadAll(); renderWishes(); if(!w.done) toast("心愿实现啦 🎉");
+    });
+    list.appendChild(div);
+  }
+}
+document.querySelectorAll("#wishFilters button").forEach(b=>b.addEventListener("click", ()=>{ wishFilter = b.dataset.f; renderWishes(); }));
+$("btnAddWish").addEventListener("click", ()=>wishForm(null));
+function wishForm(w){
+  const tags = ["旅行","美食","娱乐","生活","学习","其他"];
+  openModal(`<h3 class="hand">${w?"编辑心愿":"添加心愿"}</h3>
+    <div class="f-row"><label>心愿</label><input id="wfTitle" value="${w?esc(w.title):""}" placeholder="比如：一起去云南旅行"></div>
+    <div class="f-row"><label>小备注</label><textarea id="wfNote" placeholder="为什么想做这件事…">${w?esc(w.note||""):""}</textarea></div>
+    <div class="f-row"><label>标签</label><select id="wfTag">${tags.map(t=>`<option value="${t}" ${w&&w.tag===t?"selected":""}>${t}</option>`).join("")}</select></div>
+    <div class="f-ops"><button class="btn ghost" onclick="closeModal()">取消</button><button class="btn" id="wfSave">保存</button></div>`);
+  $("wfSave").addEventListener("click", async ()=>{
+    const payload = { title:$("wfTitle").value.trim(), note:$("wfNote").value.trim(), tag:$("wfTag").value };
+    if(!payload.title) return toast("先写下心愿内容");
+    const r = w ? await sb.from("wishes").update(payload).eq("id", w.id) : await sb.from("wishes").insert(payload);
+    if(r.error) return toast("保存失败：" + r.error.message);
+    closeModal(); await loadAll(); renderWishes(); toast("心愿记下啦 🌠");
+  });
+}
+
+/* ---------- board ---------- */
+function renderBoard(){
+  $("meName").textContent = S.me || "我";
+  const list = $("msgList"); list.innerHTML = "";
+  $("msgEmpty").classList.toggle("hidden", S.messages.length>0);
+  for(const m of S.messages){
+    const mine = m.author_name === S.me;
+    const div = document.createElement("div"); div.className = "msg";
+    div.innerHTML = `<div class="av" style="background:${mine?"var(--honey)":"var(--pink)"};color:${mine?"#fff":"#7A2E3F"}">${esc((m.author_name||"我").slice(0,1))}</div>
+      <div class="mb"><div class="mh">${esc(m.author_name||"")} · ${(m.created_at||"").slice(0,10)} ${(m.created_at||"").slice(11,16)}<button class="mini-btn red mdel" data-d>删除</button></div>
+      <div class="mt">${esc(m.body)}</div></div>`;
+    div.querySelector("[data-d]").addEventListener("click", async ()=>{
+      if(!confirm("删掉这条留言？")) return;
+      await sb.from("messages").delete().eq("id", m.id); await loadAll(); renderBoard(); toast("已删除");
+    });
+    list.appendChild(div);
+  }
+}
+$("btnSendMsg").addEventListener("click", async ()=>{
+  const body = $("msgInput").value.trim(); if(!body) return toast("先写点什么吧");
+  const { error } = await sb.from("messages").insert({ body, author_name: S.me || "我" });
+  if(error) return toast("发送失败：" + error.message);
+  $("msgInput").value = ""; await loadAll(); renderBoard(); toast("留言贴上去啦 💬");
+});
 
 /* ---------- settings ---------- */
 function openSettings(){
