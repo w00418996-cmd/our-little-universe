@@ -1582,6 +1582,36 @@ function renderDailyCard(){
 function renderAll(){ renderHome(); renderAlbum(); renderTimeline(); renderLetters(); renderWishes(); renderBoard(); renderDates(); renderHomeWishes(); renderHomePhotos(); renderDailyCard(); }
 
 
+
+/* ================= v6: daily zodiac strip ================= */
+const ZODIAC_LINES = [
+  "两个土象星座的浪漫是攒出来的：今天适合把一件小事做踏实。",
+  "摩羯今天少闷着，金牛最吃「有话直说」这一套。",
+  "金牛要的安全感很简单：说到做到。今天答应的事，记得兑现。",
+  "适合一起规划钱和未来的一天，土象组合越规划越安心。",
+  "摩羯的浪漫是行动派：今天替她把一件麻烦事办了，比情话管用。",
+  "金牛慢热，摩羯也慢热，还好你们的时间站在同一边。",
+  "今天适合聊聊下一次见面的安排，两个土象都喜欢有盼头。",
+  "别比谁更能忍，想她了就说——金牛听得懂摩羯的别扭。",
+  "稳定不是无聊，是你们的超能力：今天一起把一件小事变成仪式。",
+  "摩羯宜主动报备行程，金牛宜直接说想你了，各让一步，海阔天空。",
+  "土象的爱是长期主义：今天存一点信任，明天多一点底气。",
+  "适合一起吃点好的——金牛的快乐有一半在胃里，摩羯负责买单的帅气。"
+];
+const _renderDailyCardV6 = renderDailyCard;
+renderDailyCard = function(){
+  _renderDailyCardV6();
+  const el = $("dailyCard"); if(!el) return;
+  const t = todayStr(); let seed = 0;
+  for(const c of t) seed = (seed*31 + c.charCodeAt(0)) >>> 0;
+  const st = S.settings || {};
+  const strip = document.createElement("div");
+  strip.style.cssText = "margin-top:13px;border-top:2px dashed rgba(87,68,56,.3);padding-top:11px;font-size:14.5px;line-height:1.7";
+  strip.innerHTML = `✨ <b>星座提示</b> · 摩羯座 ♑ ${esc(st.name_a||"程锦")} × 金牛座 ♉ ${esc(st.name_b||"薏冰")}<br>${esc(ZODIAC_LINES[seed % ZODIAC_LINES.length])}`;
+  el.appendChild(strip);
+};
+
+
 /* ---------- boot ---------- */
 (async ()=>{
   const { data } = await sb.auth.getSession();
