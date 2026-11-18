@@ -386,6 +386,20 @@ nav.pills button{flex:none}
 .pk-none button{color:var(--honey-deep);font-weight:700;background:none;border:none;cursor:pointer;font-size:13px}
 .node-img{width:100%;max-height:230px;object-fit:cover;border:2px solid var(--line);border-radius:13px;margin-top:9px;cursor:pointer;display:block}
 
+
+/* ================= v7 ================= */
+.day-list{display:flex;flex-direction:column;gap:14px}
+.day-card{padding:13px}
+.day-grid{display:grid;gap:6px}
+.day-grid img{width:100%;object-fit:cover;border-radius:11px;border:2px solid var(--line);cursor:pointer;display:block}
+.day-grid.g1 img{height:270px}
+.day-grid.g2{grid-template-columns:1fr 1fr}
+.day-grid.g2 img{height:160px}
+.day-grid.g3{grid-template-columns:repeat(3,1fr)}
+.day-grid.g3 img{height:108px}
+.day-cap{font-size:15.5px;margin-top:10px;line-height:1.6}
+.day-date{color:var(--ink-soft);font-size:13px;margin-top:4px}
+
 footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 30px}
 </style>
 </head>
@@ -1610,6 +1624,182 @@ renderDailyCard = function(){
   strip.innerHTML = `✨ <b>星座提示</b> · 摩羯座 ♑ ${esc(st.name_a||"程锦")} × 金牛座 ♉ ${esc(st.name_b||"薏冰")}<br>${esc(ZODIAC_LINES[seed % ZODIAC_LINES.length])}`;
   el.appendChild(strip);
 };
+
+
+
+/* ================= v7 overrides ================= */
+/* ---------- album: grouped days ---------- */
+function dayGroups(){
+  const map = new Map();
+  for(const p of S.photos){
+    const key = p.group_id || ("s"+p.id);
+    if(!map.has(key)) map.set(key, []);
+    map.get(key).push(p);
+  }
+  const groups = [...map.values()].map(ps => ps.sort((a,b)=>a.id-b.id));
+  groups.sort((g1,g2)=>{
+    const d1 = g1[0].taken_on||"", d2 = g2[0].taken_on||"";
+    if(d1 !== d2) return d1 < d2 ? 1 : -1;
+    return g2[g2.length-1].id - g1[g1.length-1].id;
+  });
+  return groups;
+}
+function renderAlbum(){
+  const g = $("photoGrid"); g.className = "day-list"; g.innerHTML = "";
+  const groups = dayGroups();
+  $("photoEmpty").classList.toggle("hidden", S.photos.length>0);
+  for(const ps of groups){
+    const first = ps[0];
+    const div = document.createElement("div"); div.className = "card day-card";
+    const gridCls = ps.length===1 ? "g1" : ps.length===2 ? "g2" : "g3";
+    div.innerHTML = `<div class="day-grid ${gridCls}">${ps.map(p=>`<img data-gi="${p.id}" src="${esc(p.url)}" loading="lazy">`).join("")}</div>
+      ${first.caption?`<div class="day-cap">${esc(first.caption)}</div>`:""}
+      <div class="day-date">${first.taken_on?fmtCN(first.taken_on):""}${ps.length>1?` · 共 ${ps.length} 张`:""}</div>`;
+    div.querySelectorAll("[data-gi]").forEach(img=>{
+      img.addEventListener("click", ()=>{
+        const pid = +img.dataset.gi;
+        const idx = ps.findIndex(x=>x.id===pid);
+        viewPhoto(ps[idx], idx, ps);
+      });
+    });
+    g.appendChild(div);
+  }
+}
+
+/* ---------- viewer: works within a list (album group or all photos) ---------- */
+let photoListState = null;
+function viewPhoto(p, idx, list){
+  photoListState = list || sortedPhotos();
+  photoIdx = (typeof idx === "number") ? idx : Math.max(0, photoListState.findIndex(x=>x.id===p.id));
+  showPhoto();
+}
+function showPhoto(){
+  const items = photoListState || sortedPhotos();
+  const p = items[photoIdx]; if(!p) return;
+  openModal(`<img class="view-img" id="viewerImg" src="${esc(p.url)}">
+    <div style="margin-top:12px;font-size:17px" class="hand">${esc(p.caption||"我们的照片")}</div>
+    <div style="color:var(--ink-soft);font-size:13px;margin-top:3px">${p.taken_on?fmtCN(p.taken_on):""}</div>
+    <div class="viewer-nav">
+      <button class="vn-btn" id="pvPrev">← 上一张</button>
+      <span class="vn-c">${photoIdx+1} / ${items.length}</span>
+      <button class="vn-btn" id="pvNext">下一张 →</button>
+    </div>
+    <div class="f-ops"><button class="btn danger" id="pvDel">删除</button><button class="btn ghost" id="pvEdit">改配文</button><button class="btn" onclick="closeModal()">返回</button></div>`);
+  const step = d => { photoIdx = (photoIdx + d + items.length) % items.length; showPhoto(); };
+  $("pvPrev").addEventListener("click", ()=>step(-1));
+  $("pvNext").addEventListener("click", ()=>step(1));
+  const img = $("viewerImg"); let sx = null;
+  img.addEventListener("touchstart", e=>{ sx = e.touches[0].clientX; }, { passive:true });
+  img.addEventListener("touchend", e=>{ if(sx===null) return; const dx = e.changedTouches[0].clientX - sx; sx = null; if(Math.abs(dx) > 42) step(dx < 0 ? 1 : -1); }, { passive:true });
+  $("pvDel").addEventListener("click", async ()=>{
+    if(!confirm("删掉照片「"+(p.caption||"我们的照片")+"」？删了就找不回来啦")) return;
+    await sb.storage.from("photos").remove([p.storage_path]);
+    await sb.from("photos").delete().eq("id", p.id);
+    photoListState = null;
+    closeModal(); await loadAll(); renderAlbum(); renderHomePhotos(); toast("已删除");
+  });
+  $("pvEdit").addEventListener("click", ()=>{
+    openModal(`<h3 class="hand">改配文${p.group_id?"（整组一起改）":""}</h3>
+      <div class="f-row"><label>配文</label><input id="peCap" value="${esc(p.caption||"")}"></div>
+      <div class="f-row"><label>拍摄日期</label><input id="peDate" type="date" value="${p.taken_on||""}"></div>
+      <div class="f-ops"><button class="btn ghost" id="peBack">返回</button><button class="btn" id="peSave">保存</button></div>`);
+    $("peBack").addEventListener("click", showPhoto);
+    $("peSave").addEventListener("click", async ()=>{
+      const payload = { caption:$("peCap").value.trim(), taken_on:$("peDate").value||null };
+      const q = p.group_id ? sb.from("photos").update(payload).eq("group_id", p.group_id) : sb.from("photos").update(payload).eq("id", p.id);
+      const { error } = await q;
+      if(error) return toast("保存失败："+error.message);
+      await loadAll(); renderAlbum(); renderHomePhotos();
+      photoListState = p.group_id ? sortedPhotos().filter(x=>x.group_id===p.group_id).sort((a,b)=>a.id-b.id) : sortedPhotos();
+      photoIdx = Math.max(0, photoListState.findIndex(x=>x.id===p.id));
+      showPhoto(); toast("改好啦");
+    });
+  });
+}
+
+/* ---------- upload: one caption per group ---------- */
+(function(){
+  const old = $("photoFile"); if(!old) return;
+  const nf = old.cloneNode();
+  nf.setAttribute("multiple", "");
+  old.replaceWith(nf);
+  nf.addEventListener("change", ()=>{
+    const files = [...nf.files]; nf.value = "";
+    if(!files.length) return;
+    const items = files.map(f=>({ f, url:URL.createObjectURL(f) }));
+    openModal(`<h3 class="hand">添加照片 · ${items.length} 张</h3>
+      <div class="mp-grid">${items.map(it=>`<div class="mp-item"><img src="${it.url}"></div>`).join("")}</div>
+      <div class="f-row"><label>配文（一组共用一段）</label><textarea id="mpCap" placeholder="比如：周末一起去吃火锅啦"></textarea></div>
+      <div class="f-row"><label>拍摄日期</label><input id="mpDate" type="date" value="${todayStr()}"></div>
+      <div class="f-ops"><button class="btn ghost" onclick="closeModal()">取消</button><button class="btn" id="mpSave">存进日常记录</button></div>`);
+    $("mpSave").addEventListener("click", async ()=>{
+      const btn = $("mpSave"); btn.disabled = true;
+      const taken = $("mpDate").value || null;
+      const cap = $("mpCap").value.trim();
+      const gid = items.length > 1 ? "g"+Date.now() : null;
+      let ok = 0; const errs = [];
+      for(let i=0;i<items.length;i++){
+        btn.textContent = "上传中 "+(i+1)+"/"+items.length+"…";
+        const path = Date.now()+"_"+i+"_"+items[i].f.name.replace(/[^\w.\-]/g,"_");
+        const up = await sb.storage.from("photos").upload(path, items[i].f);
+        if(up.error){ errs.push(items[i].f.name); continue; }
+        const ins = await sb.from("photos").insert({ storage_path:path, caption:cap, taken_on:taken, group_id:gid });
+        if(ins.error){ errs.push(items[i].f.name); continue; }
+        ok++;
+      }
+      closeModal(); await loadAll(); renderAlbum(); renderHomePhotos(); renderHome();
+      if(errs.length) toast("存好 "+ok+" 张，"+errs.length+" 张失败了");
+      else toast(ok > 1 ? "一组照片存好啦 📷" : "照片收好啦 📷");
+    });
+  });
+})();
+
+/* ---------- moments: pick from album OR upload directly ---------- */
+function momentForm(m){
+  let picked = m ? (m.photo_path || null) : null;
+  openModal(`<h3 class="hand">${m?"编辑节点":"添加节点"}</h3>
+    <div class="f-row"><label>日期</label><input id="mfDate" type="date" value="${m?m.date:todayStr()}"></div>
+    <div class="f-row"><label>标题</label><input id="mfTitle" value="${m?esc(m.title):""}" placeholder="比如：第一次见面"></div>
+    <div class="f-row"><label>想记下来的话</label><textarea id="mfNote" placeholder="那天发生了什么…">${m?esc(m.note||""):""}</textarea></div>
+    <div class="f-row"><label>配一张照片（可选）</label>
+      <div id="pkGrid"></div>
+      <div class="pk-none">点一张选中，再点一次取消 · <button type="button" id="pkClear">不配图</button></div>
+      <button type="button" class="btn ghost small" id="pkUploadBtn">＋ 直接上传新图</button>
+      <input type="file" id="pkFile" accept="image/*" class="hidden">
+      <div id="pkMsg" style="font-size:13px;color:var(--ink-soft);margin-top:6px"></div>
+    </div>
+    <div class="f-ops"><button class="btn ghost" onclick="closeModal()">取消</button><button class="btn" id="mfSave">保存</button></div>`);
+  function renderPkGrid(){
+    const box = $("pkGrid"); if(!box) return;
+    if(!S.photos.length){ box.innerHTML = `<div class="pk-none">相册还没有照片，可以直接上传一张</div>`; return; }
+    box.innerHTML = `<div class="pk-grid">${S.photos.map(p=>`<img data-pk="${esc(p.storage_path)}" src="${esc(p.url)}" class="${picked===p.storage_path?"sel":""}">`).join("")}</div>`;
+    box.querySelectorAll("[data-pk]").forEach(img=>{
+      img.addEventListener("click", ()=>{ picked = (picked === img.dataset.pk) ? null : img.dataset.pk; renderPkGrid(); });
+    });
+  }
+  renderPkGrid();
+  $("pkClear").addEventListener("click", ()=>{ picked = null; renderPkGrid(); });
+  $("pkUploadBtn").addEventListener("click", ()=>$("pkFile").click());
+  $("pkFile").addEventListener("change", async ()=>{
+    const f = $("pkFile").files[0]; if(!f) return;
+    $("pkMsg").textContent = "上传中…";
+    const path = Date.now()+"_m_"+f.name.replace(/[^\w.\-]/g,"_");
+    const up = await sb.storage.from("photos").upload(path, f);
+    if(up.error){ $("pkMsg").textContent = "上传失败："+up.error.message; return; }
+    const ins = await sb.from("photos").insert({ storage_path:path, caption:"", taken_on:$("mfDate").value||null });
+    if(ins.error){ $("pkMsg").textContent = "保存失败："+ins.error.message; return; }
+    picked = path;
+    await loadAll(); renderPkGrid(); renderAlbum(); renderHomePhotos();
+    $("pkMsg").textContent = "传好啦，已自动选中（这张也会出现在日常记录里）";
+  });
+  $("mfSave").addEventListener("click", async ()=>{
+    const payload = { date:$("mfDate").value, title:$("mfTitle").value.trim(), note:$("mfNote").value.trim(), photo_path:picked };
+    if(!payload.date || !payload.title) return toast("日期和标题都要填");
+    const r = m ? await sb.from("moments").update(payload).eq("id", m.id) : await sb.from("moments").insert(payload);
+    if(r.error) return toast("保存失败："+r.error.message);
+    closeModal(); await loadAll(); renderTimeline(); toast("记下来啦 ✍️");
+  });
+}
 
 
 /* ---------- boot ---------- */
