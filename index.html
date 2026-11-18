@@ -400,6 +400,8 @@ nav.pills button{flex:none}
 .day-cap{font-size:15.5px;margin-top:10px;line-height:1.6}
 .day-date{color:var(--ink-soft);font-size:13px;margin-top:4px}
 
+.pg-sub{color:var(--ink-soft);font-size:13.5px;margin:-4px 0 12px}
+
 footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 30px}
 </style>
 </head>
@@ -411,7 +413,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
   <div class="card auth-card">
     <img class="auth-img" src="img/pair-front.jpg" alt="小棕熊和小白猫">
     <h1 class="hand">我们的小宇宙</h1>
-    <div class="sub">这里只住着两个人 · 请先登录</div>
+    <div class="sub">把平凡的日子，慢慢写成我们的故事。</div>
     <div class="f-row"><label>邮箱</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com"></div>
     <div class="f-row"><label>密码</label><div class="pwd-wrap"><input id="authPass" type="password" autocomplete="current-password" placeholder="至少 6 位"><button class="pwd-eye" id="pwdToggle" type="button" title="显示/隐藏密码">👁</button></div></div>
     <button class="btn" id="btnLogin" style="width:100%">登 录</button>
@@ -452,24 +454,24 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
       <div class="card" style="padding:24px 20px">
         <div class="hero4">
           <div class="frame">
-            <div class="note-tag hand">和你在一起，都是最好的时光 ♡</div>
+            <div class="note-tag hand">欢迎回到我们的小宇宙 ♡</div>
             <img src="img/hero-sunset.jpg" alt="小棕熊和小白猫看夕阳">
           </div>
           <div class="hero-r">
-            <div class="h-lab hand">我们已经在一起了</div>
+            <div class="h-lab hand">我们已经一起走过</div>
             <div class="h-num"><span id="daysNum">–</span><small> 天</small></div>
             <svg width="180" height="20" viewBox="0 0 300 22" style="max-width:82%"><path d="M4 12 Q 40 4, 75 12 T 150 12" fill="none" stroke="#F2A0B5" stroke-width="2.5" stroke-linecap="round"/><text x="152" y="17" font-size="15" fill="#E4572E">❤</text><path d="M172 12 Q 205 4, 240 12 T 296 12" fill="none" stroke="#F2A0B5" stroke-width="2.5" stroke-linecap="round"/></svg>
             <div class="h-from" id="daysFrom">从设置里填上在一起的那一天开始</div>
-            <button class="btn" data-go="timeline">一起走过更多的日子 ➜</button>
+            <button class="btn" data-go="timeline">继续写我们的故事 ♡</button>
             <div class="hidden"><span id="nameA1"></span><span id="nameB1"></span></div>
           </div>
         </div>
       </div>
 
-      <div class="sec-title hand">🌈 今日小卡</div>
+      <div class="sec-title hand">🌈 今日一笺 <span style="font-size:12.5px;color:var(--ink-soft);margin-left:8px;font-family:inherit">今天，也给彼此留一点温柔。</span></div>
       <div class="card daily-card" id="dailyCard"></div>
 
-      <div class="sec-title hand">🎁 即将到来的纪念日</div>
+      <div class="sec-title hand">🎁 即将到来的纪念日 <span style="font-size:12.5px;color:var(--ink-soft);margin-left:8px;font-family:inherit">下一份值得期待的日子</span></div>
       <div class="card" id="nextCard">
         <div class="cd-card">
           <div class="cd-ico">🎁</div>
@@ -495,7 +497,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
 
       <svg class="cloud-wave" viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,34 C240,62 480,6 720,34 C960,62 1200,6 1440,34 L1440,60 L0,60 Z" fill="#F8D8D8" opacity=".55"/></svg>
 
-      <div class="sec-title hand">⭐ 心愿清单 <span style="font-size:12.5px;background:#FDECEF;border:1.8px solid var(--line);border-radius:999px;padding:2px 11px;margin-left:8px;font-family:inherit">和你一起实现的小愿望 ♡</span><button class="view-all" data-go="wishes">查看全部 &gt;</button></div>
+      <div class="sec-title hand">⭐ 心愿清单 <span style="font-size:12.5px;background:#FDECEF;border:1.8px solid var(--line);border-radius:999px;padding:2px 11px;margin-left:8px;font-family:inherit">想和你一起完成的事</span><button class="view-all" data-go="wishes">查看全部 &gt;</button></div>
       <div class="card">
         <div class="home-wish">
           <div class="hw-list">
@@ -509,7 +511,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
         </div>
       </div>
 
-      <div class="sec-title hand">📷 我们的相册 <span style="font-size:12.5px;color:var(--ink-soft);margin-left:8px;font-family:inherit">记录下每一个心动的瞬间 ♡</span><button class="view-all" data-go="album">查看全部 &gt;</button></div>
+      <div class="sec-title hand">📷 我们的相册 <span style="font-size:12.5px;color:var(--ink-soft);margin-left:8px;font-family:inherit">最近收藏的时光</span><button class="view-all" data-go="album">查看全部 &gt;</button></div>
       <div class="photo-strip" id="homePhotos"></div>
       <div class="empty hidden" id="homePhotoEmpty">相册还空着<br><button class="linkish" data-go="album">去放第一张照片 📷</button></div>
 
@@ -520,6 +522,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
     <section id="tab-album" class="hidden">
       <div class="backbar"><button class="back-btn" data-back>← 返回</button><span class="back-title hand">日常记录</span></div>
       <div class="sec-head"><h2 class="hand">时光相册</h2><button class="btn small" id="btnAddPhoto">＋ 添加照片</button></div>
+      <div class="pg-sub">把普通的今天，也认真收藏起来。</div>
       <input type="file" id="photoFile" accept="image/*" class="hidden">
       <div class="grid" id="photoGrid"></div>
       <div class="empty hidden" id="photoEmpty">相册还空着<br>把你们的第一张照片放进来吧 📷</div>
@@ -529,6 +532,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
     <section id="tab-timeline" class="hidden">
       <div class="backbar"><button class="back-btn" data-back>← 返回</button><span class="back-title hand">回忆库</span></div>
       <div class="sec-head"><h2 class="hand">回忆时间线</h2><button class="btn small" id="btnAddMoment">＋ 添加节点</button></div>
+      <div class="pg-sub">有些日子过去了，却一直亮在心里。</div>
       <div class="card"><div class="tl" id="momentList"></div>
       <div class="empty hidden" id="momentEmpty">故事线还空着<br>从第一次见面开始写吧 ✍️</div></div>
     </section>
@@ -537,6 +541,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
     <section id="tab-letters" class="hidden">
       <div class="backbar"><button class="back-btn" data-back>← 返回</button><span class="back-title hand">时光信</span></div>
       <div class="sec-head"><h2 class="hand">时光信</h2><button class="btn small" id="btnAddLetter">＋ 写一封信</button></div>
+      <div class="pg-sub">把此刻的话，留给未来的我们。</div>
       <div id="letterList"></div>
       <div class="empty hidden" id="letterEmpty">还没有时光信<br>写一封锁起来，到日子再一起拆 💌</div>
     </section>
@@ -545,6 +550,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
     <section id="tab-wishes" class="hidden">
       <div class="backbar"><button class="back-btn" data-back>← 返回</button><span class="back-title hand">心愿清单</span></div>
       <div class="sec-head"><h2 class="hand">⭐ 心愿清单</h2><button class="btn small" id="btnAddWish" style="background:#F5C542;color:var(--ink)">＋ 添加心愿</button></div>
+      <div class="pg-sub">把期待写下来，再一起慢慢实现。</div>
       <div style="color:var(--ink-soft);font-size:13.5px;margin:-6px 0 14px">好多心愿想一起实现</div>
       <div class="stats">
         <div class="stat y"><div class="n" id="wishAll">0</div><div class="l">全部心愿</div></div>
@@ -565,6 +571,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
     <section id="tab-board" class="hidden">
       <div class="backbar"><button class="back-btn" data-back>← 返回</button><span class="back-title hand">留言板</span></div>
       <div class="sec-head"><h2 class="hand">💬 留言板</h2></div>
+      <div class="pg-sub">不一定要说很多，一句话也很珍贵。</div>
       <div style="color:var(--ink-soft);font-size:13.5px;margin:-6px 0 14px">想说的话留在这里，对方打开网站就能看到</div>
       <div class="card">
         <div class="compose">
@@ -581,13 +588,14 @@ footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:0 14px 3
     <section id="tab-dates" class="hidden">
       <div class="backbar"><button class="back-btn" data-back>← 返回</button><span class="back-title hand">纪念日</span></div>
       <div class="sec-head"><h2 class="hand">🎂 我们的纪念日</h2><button class="btn small" id="btnAddAnn">＋ 添加纪念日</button></div>
+      <div class="pg-sub">有些日子，因为有你，才变得特别。</div>
       <div style="color:var(--ink-soft);font-size:13.5px;margin:-6px 0 14px">这里只放你们自己定的日子，每条都能改、能删</div>
       <div id="dateList"></div>
       <div class="empty hidden" id="dateEmpty">还没有纪念日<br>先在设置里填上在一起的起始日吧 🎂</div>
     </section>
 
   </main>
-  <footer><svg class="cloud-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="margin-bottom:8px"><path d="M0,34 C240,62 480,6 720,34 C960,62 1200,6 1440,34 L1440,60 L0,60 Z" fill="#F8D8D8" opacity=".6"/></svg><span id="footNames">我们的小宇宙</span> · 每一天都是礼物 ♡</footer>
+  <footer><svg class="cloud-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="margin-bottom:8px"><path d="M0,34 C240,62 480,6 720,34 C960,62 1200,6 1440,34 L1440,60 L0,60 Z" fill="#F8D8D8" opacity=".6"/></svg><span id="footNames">我们的小宇宙</span> · 日子很长，故事很慢。幸好，我们可以一起写下去。♡</footer>
 </div>
 
 
@@ -871,7 +879,7 @@ function viewLetter(l){
     openModal(`<div style="text-align:center;padding:8px 0">
       <div style="font-size:52px">🔒</div>
       <h3 class="hand" style="margin:8px 0">${esc(l.title||"一封信")}</h3>
-      <p style="color:var(--ink-soft);line-height:1.8">这封信还在时光里封存着<br>到 <b>${fmtCN(l.unlock_on)}</b> 才能拆开<br>还有 ${diffDays(todayStr(), l.unlock_on)} 天，慢慢等 🌙</p>
+      <p style="color:var(--ink-soft);line-height:1.8">这封信还在等它约定的那一天。<br>到 <b>${fmtCN(l.unlock_on)}</b> 才能拆开<br>还有 ${diffDays(todayStr(), l.unlock_on)} 天，慢慢等 🌙</p>
       <div class="f-ops" style="justify-content:center"><button class="btn danger" id="lvDel">删除这封信</button><button class="btn" onclick="closeModal()">先放着</button></div></div>`);
   } else {
     openModal(`<h3 class="hand">${esc(l.title||"一封信")}</h3>
@@ -1297,7 +1305,7 @@ function viewLetter(l){
     openModal(`<div style="text-align:center;padding:8px 0">
       <img src="img/sleep.jpg" style="width:100%;border-radius:15px;border:2px solid var(--line)" alt="">
       <h3 class="hand" style="margin:12px 0 8px">${esc(l.title||"一封信")}</h3>
-      <p style="color:var(--ink-soft);line-height:1.8">这封信还在时光里封存着，小棕熊和小白猫守着它<br>到 <b>${fmtCN(l.unlock_on)}</b> 才能拆开<br>还有 ${diffDays(todayStr(), l.unlock_on)} 天，慢慢等 🌙</p>
+      <p style="color:var(--ink-soft);line-height:1.8">这封信还在等它约定的那一天。<br>到 <b>${fmtCN(l.unlock_on)}</b> 才能拆开<br>还有 ${diffDays(todayStr(), l.unlock_on)} 天，慢慢等 🌙</p>
       <div class="f-ops" style="justify-content:center"><button class="btn danger" id="lvDel">删除这封信</button><button class="btn" onclick="closeModal()">返回</button></div></div>`);
   } else {
     openModal(`<h3 class="hand">${esc(l.title||"一封信")}</h3>
@@ -1542,34 +1550,34 @@ function renderTimeline(){
 
 /* ---------- daily card ---------- */
 const LOVE_LINES = [
-  "山高路远，我们慢慢走，反正终点是你。",
-  "今天也辛苦啦，记得你身后一直有个人。",
-  "想把所有好天气，都留给和你见面的那天。",
-  "你是我平淡日子里，最想炫耀的那部分。",
-  "今天的月亮和昨天一样圆，我想你也和昨天一样多，还多一点。",
-  "把今天过好，就是给我们的以后存钱。",
-  "你笑一次，我就觉得这一天没白过。",
-  "不求轰轰烈烈，只求天长地久地有你。",
-  "世界上最安稳的事，就是知道你在那边，也在想我。",
-  "忙的时候各自努力，闲的时候第一时间找你。",
-  "你是我所有计划里，唯一不想改的那一条。",
-  "风会替我抱抱你，雨会替我亲亲你，我会亲自来见你。",
-  "日子再普通，有你就不算浪费。",
-  "异地不苦，苦的是想抱抱的时候只能抱手机——所以更要好好攒见面。"
+  "山高路远不着急，我们把日子过稳，把以后的路走长。",
+  "今天辛苦啦。隔着一点距离，也别忘了有人一直惦记着你。",
+  "想把好天气、好心情，还有见面时的拥抱，都留给你。",
+  "平凡的日子里，最想分享的人始终是你。",
+  "今天的月亮和昨天一样圆，我对你的想念，却每天都多一点。",
+  "把今天认真过好，也是在为我们的以后积攒底气。",
+  "你笑的时候，连普通的一天都变得值得纪念。",
+  "不必每一天都轰轰烈烈，只希望每一天都有彼此。",
+  "最踏实的事情，是知道远方有你，也有我们共同的约定。",
+  "忙的时候各自努力，闲下来的时候，就把时间留给彼此。",
+  "计划可以修改，想和你一起走下去这件事，不改。",
+  "风替我送去问候，我把拥抱留到见面那天。",
+  "日子不必总有惊喜，有你参与，就已经足够珍贵。",
+  "距离提醒我们珍惜每次见面，也提醒我们认真安排下一次相逢。"
 ];
 const DAILY_TASKS = [
-  "给她发一句语音，说今天最想她的一件事",
-  "翻出一张你们的老照片，发给她，说说当时发生了什么",
-  "把下一次见面想做的 3 件小事，写进心愿清单",
-  "给她写一封时光信，锁到下个纪念日再拆",
-  "学一句她家乡的方言，录下来发给她",
-  "在留言板写一句只有你们两个懂的话",
-  "约她云看同一部电影，边看边聊",
-  "给她唱半首歌，跑调也没关系",
-  "把一张合照设成手机壁纸，截图给她看",
-  "认真夸她一个具体的优点，不许只说好看",
-  "今天早点睡，把好状态留给明天",
-  "给她点一杯爱喝的奶茶；点不了就记下来，见面补上"
+  "给对方发一段语音，说说今天最想分享的一件事。",
+  "翻出一张以前的照片，轮流讲讲当时记得的细节。",
+  "把下一次见面最想做的三件小事，写进心愿清单。",
+  "给未来的彼此写一封信，约定某一天一起打开。",
+  "教对方一句家乡话，再录下来听听发音。",
+  "在留言板留下一句只有你们两个才懂的话。",
+  "约好一个时间，一起云看同一部电影。",
+  "各自选一首歌，告诉对方为什么会想到彼此。",
+  "选一张喜欢的合照，设置成手机壁纸。",
+  "认真说出一个欣赏对方的具体优点，不只停留在「好看」。",
+  "互相提醒早点休息，把好状态留给明天。",
+  "写下一件下次见面想一起吃或一起做的事，先把期待存进清单。"
 ];
 function renderDailyCard(){
   const el = $("dailyCard"); if(!el) return;
@@ -1578,17 +1586,17 @@ function renderDailyCard(){
   const kind = seed % 3;
   if(kind===0 && S.photos && S.photos.length){
     const p = S.photos[seed % S.photos.length];
-    el.innerHTML = `<div class="dc-k">📸 今日小卡 · 回忆杀</div>
+    el.innerHTML = `<div class="dc-k">📸 今日一笺 · 今日回忆</div>
       <img class="dc-img" src="${esc(p.url)}">
       <div class="dc-t hand">${esc(p.caption||"我们的照片")}</div>
       <div class="dc-s">${p.taken_on?fmtCN(p.taken_on)+" · ":""}还记得这一天吗？</div>`;
     el.querySelector(".dc-img").addEventListener("click", ()=>viewPhoto(p));
   } else if(kind===2){
-    el.innerHTML = `<div class="dc-k">🎲 今日小卡 · 小任务</div>
+    el.innerHTML = `<div class="dc-k">🎲 今日一笺 · 今日小事</div>
       <div class="dc-t hand">${esc(DAILY_TASKS[seed % DAILY_TASKS.length])}</div>
       <div class="dc-s">做到了，记得去留言板打个卡</div>`;
   } else {
-    el.innerHTML = `<div class="dc-k">💌 今日小卡 · 一句话</div>
+    el.innerHTML = `<div class="dc-k">💌 今日一笺 · 今日寄语</div>
       <div class="dc-t hand">${esc(LOVE_LINES[seed % LOVE_LINES.length])}</div>
       <div class="dc-s">${fmtCN(t)} · 每天一张，零点刷新</div>`;
   }
@@ -1599,18 +1607,18 @@ function renderAll(){ renderHome(); renderAlbum(); renderTimeline(); renderLette
 
 /* ================= v6: daily zodiac strip ================= */
 const ZODIAC_LINES = [
-  "两个土象星座的浪漫是攒出来的：今天适合把一件小事做踏实。",
-  "摩羯今天少闷着，金牛最吃「有话直说」这一套。",
-  "金牛要的安全感很简单：说到做到。今天答应的事，记得兑现。",
-  "适合一起规划钱和未来的一天，土象组合越规划越安心。",
-  "摩羯的浪漫是行动派：今天替她把一件麻烦事办了，比情话管用。",
-  "金牛慢热，摩羯也慢热，还好你们的时间站在同一边。",
-  "今天适合聊聊下一次见面的安排，两个土象都喜欢有盼头。",
-  "别比谁更能忍，想她了就说——金牛听得懂摩羯的别扭。",
-  "稳定不是无聊，是你们的超能力：今天一起把一件小事变成仪式。",
-  "摩羯宜主动报备行程，金牛宜直接说想你了，各让一步，海阔天空。",
-  "土象的爱是长期主义：今天存一点信任，明天多一点底气。",
-  "适合一起吃点好的——金牛的快乐有一半在胃里，摩羯负责买单的帅气。"
+  "两个土象星座的默契，藏在把小事认真做好的日常里。",
+  "摩羯有时习惯把心事放在心里，不妨主动说说今天的感受。",
+  "安心感常常来自小小的兑现：答应过的事情，记得做到。",
+  "适合一起规划下一次见面，把期待落在一个具体的日期里。",
+  "比起猜测对方的心思，不如把自己的想法温柔地说出来。",
+  "慢热也没有关系，只要愿意持续靠近，就是属于你们的节奏。",
+  "今天不妨聊聊下一次见面，把盼头写进日历。",
+  "想念不必憋成暗号，说出来，让对方有机会接住。",
+  "稳定不是没有惊喜，而是有人愿意一起创造生活里的小仪式。",
+  "报备不是束缚，表达也不是负担，找到彼此都舒服的频率就好。",
+  "长久的关系靠一点点信任积累，今天也可以从一件小事开始。",
+  "找个空闲时间，一起吃点喜欢的东西，生活中的小快乐也值得认真安排。"
 ];
 const _renderDailyCardV6 = renderDailyCard;
 renderDailyCard = function(){
@@ -1621,7 +1629,7 @@ renderDailyCard = function(){
   const st = S.settings || {};
   const strip = document.createElement("div");
   strip.style.cssText = "margin-top:13px;border-top:2px dashed rgba(87,68,56,.3);padding-top:11px;font-size:14.5px;line-height:1.7";
-  strip.innerHTML = `✨ <b>星座提示</b> · 摩羯座 ♑ ${esc(st.name_a||"程锦")} × 金牛座 ♉ ${esc(st.name_b||"薏冰")}<br>${esc(ZODIAC_LINES[seed % ZODIAC_LINES.length])}`;
+  strip.innerHTML = `✨ <b>土象星座默契小笺</b> · 摩羯座 ♑ ${esc(st.name_a||"程锦")} × 金牛座 ♉ ${esc(st.name_b||"薏冰")}<br>${esc(ZODIAC_LINES[seed % ZODIAC_LINES.length])}<br><span style="font-size:12px;color:var(--ink-soft)">星座只是有趣的小参考，真正决定关系温度的，始终是两个人的理解与行动。</span>`;
   el.appendChild(strip);
 };
 
