@@ -1772,8 +1772,8 @@ function momentForm(m){
     <div class="f-row"><label>配一张照片（可选）</label>
       <div id="pkGrid"></div>
       <div class="pk-none">点一张选中，再点一次取消 · <button type="button" id="pkClear">不配图</button></div>
-      <button type="button" class="btn ghost small" id="pkUploadBtn">＋ 直接上传新图</button>
-      <input type="file" id="pkFile" accept="image/*" class="hidden">
+      <button type="button" class="btn ghost small" id="pkUploadBtn">＋ 直接上传新图（可多选）</button>
+      <input type="file" id="pkFile" accept="image/*" class="hidden" multiple>
       <div id="pkMsg" style="font-size:13px;color:var(--ink-soft);margin-top:6px"></div>
     </div>
     <div class="f-ops"><button class="btn ghost" onclick="closeModal()">取消</button><button class="btn" id="mfSave">保存</button></div>`);
@@ -1789,16 +1789,28 @@ function momentForm(m){
   $("pkClear").addEventListener("click", ()=>{ picked = null; renderPkGrid(); });
   $("pkUploadBtn").addEventListener("click", ()=>$("pkFile").click());
   $("pkFile").addEventListener("change", async ()=>{
-    const f = $("pkFile").files[0]; if(!f) return;
-    $("pkMsg").textContent = "上传中…";
-    const path = Date.now()+"_m_"+f.name.replace(/[^\w.\-]/g,"_");
-    const up = await sb.storage.from("photos").upload(path, f);
-    if(up.error){ $("pkMsg").textContent = "上传失败："+up.error.message; return; }
-    const ins = await sb.from("photos").insert({ storage_path:path, caption:"", taken_on:$("mfDate").value||null });
-    if(ins.error){ $("pkMsg").textContent = "保存失败："+ins.error.message; return; }
-    picked = path;
-    await loadAll(); renderPkGrid(); renderAlbum(); renderHomePhotos();
-    $("pkMsg").textContent = "传好啦，已自动选中（这张也会出现在日常记录里）";
+    const files = [...$("pkFile").files]; $("pkFile").value = "";
+    if(!files.length) return;
+    const gid = files.length > 1 ? "g"+Date.now() : null;
+    let firstPath = null, ok = 0;
+    for(let i=0;i<files.length;i++){
+      $("pkMsg").textContent = "上传中 "+(i+1)+"/"+files.length+"…";
+      const f = files[i];
+      const path = Date.now()+"_m"+i+"_"+f.name.replace(/[^\w.\-]/g,"_");
+      const up = await sb.storage.from("photos").upload(path, f);
+      if(up.error) continue;
+      const ins = await sb.from("photos").insert({ storage_path:path, caption:"", taken_on:$("mfDate").value||null, group_id:gid });
+      if(ins.error) continue;
+      if(!firstPath) firstPath = path;
+      ok++;
+    }
+    if(firstPath){
+      picked = firstPath;
+      await loadAll(); renderPkGrid(); renderAlbum(); renderHomePhotos();
+      $("pkMsg").textContent = ok > 1 ? ("传好啦，一共 "+ok+" 张：第一张已设为这条回忆的配图，其余的也存进日常记录了（点上方图片可以换配图）") : "传好啦，已自动选中（这张也会出现在日常记录里）";
+    } else {
+      $("pkMsg").textContent = "上传失败，再试一次";
+    }
   });
   $("mfSave").addEventListener("click", async ()=>{
     const payload = { date:$("mfDate").value, title:$("mfTitle").value.trim(), note:$("mfNote").value.trim(), photo_path:picked };
